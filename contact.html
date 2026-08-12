@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for a Revenue Audit | Grov Media</title>
+<meta name="description" content="Apply for a complimentary Revenue Audit with Grov Media. We'll find the leak, name the number worth moving, and tell you whether we can fix it.">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
+    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
+    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
+    fontSize: {
+      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
+      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
+      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
+      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
+      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
+      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
+      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
+      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
+    }
+  }}
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased selection:bg-tertiary selection:text-ink-black overflow-x-hidden font-body">
+<div id="scroll-progress"></div>
+<div id="cursor-dot"></div>
+
+<nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
+  <div class="hidden md:flex gap-8 items-center">
+    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
+    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
+    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
+    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  </div>
+  <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
+</nav>
+
+<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
+<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
+  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <div class="flex flex-col gap-8">
+    <a href="index.html" class="font-display text-2xl">Home</a>
+    <a href="method.html" class="font-display text-2xl">Method</a>
+    <a href="results.html" class="font-display text-2xl">Results</a>
+    <a href="about.html" class="font-display text-2xl">About</a>
+    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
+    <a href="faq.html" class="font-display text-2xl">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
+  </div>
+</div>
+
+<main class="pt-20">
+  <section class="min-h-[80vh] flex flex-col justify-center py-24 px-6 md:px-margin-safe relative overflow-hidden">
+    <div class="bg-grain"></div>
+    <div class="radial-glow"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center reveal">
+      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Next Step</p>
+      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">Apply for a <span class="italic text-tertiary">Revenue Audit.</span></h1>
+      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-4">We will find the leak, name the number worth moving, and tell you whether we can fix it.</p>
+      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">If there is no clear path to revenue movement, we will say no.</p>
+
+      <a href="https://gm.grovmedia.com/widget/bookings/growthopportunitygrov" target="_blank" rel="noopener" class="interactive-zone inline-flex items-center gap-3 btn-gold bg-tertiary text-ink-black px-10 py-5 font-body text-label-caps uppercase hover:opacity-90">
+        Book Your Revenue Audit
+        <span class="material-symbols-outlined text-lg">arrow_outward</span>
+      </a>
+      <p class="font-body text-label-caps uppercase text-on-surface-variant/70 tracking-widest mt-6">Complimentary · No obligation · Focused entirely on your business</p>
+    </div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <!-- Qualification recap -->
+  <section class="py-section-gap px-6 md:px-margin-safe">
+    <div class="max-w-3xl mx-auto mb-16 text-center reveal">
+      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Before You Apply</p>
+      <h2 class="font-display text-headline-lg text-on-surface mb-6">Fit matters. We qualify before we build.</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      <div class="reveal">
+        <p class="font-body text-label-caps uppercase text-tertiary mb-6">✓ Good fit</p>
+        <ul class="space-y-4 font-body text-body-md text-on-surface">
+          <li class="flex gap-3"><span class="text-tertiary">✓</span>Service business already generating revenue</li>
+          <li class="flex gap-3"><span class="text-tertiary">✓</span>Some existing traction — audience, leads, or clients</li>
+          <li class="flex gap-3"><span class="text-tertiary">✓</span>Growth is inconsistent, hard to predict</li>
+          <li class="flex gap-3"><span class="text-tertiary">✓</span>Willing to build infrastructure, not just run campaigns</li>
+          <li class="flex gap-3"><span class="text-tertiary">✓</span>Revenue between $5K–$80K/month</li>
+        </ul>
+      </div>
+      <div class="reveal delay-200">
+        <p class="font-body text-label-caps uppercase text-on-surface-variant mb-6">✕ Not a fit</p>
+        <ul class="space-y-4 font-body text-body-md text-on-surface-variant">
+          <li class="flex gap-3"><span>✕</span>Pre-revenue — still figuring out the offer</li>
+          <li class="flex gap-3"><span>✕</span>Product-based business or e-commerce</li>
+          <li class="flex gap-3"><span>✕</span>Only want social media management or content posting</li>
+          <li class="flex gap-3"><span>✕</span>Not open to building systems, only quick fixes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <!-- Direct contact -->
+  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low">
+    <div class="max-w-3xl mx-auto text-center reveal">
+      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Prefer to reach us directly?</p>
+      <a href="tel:+918733948884" class="font-display text-3xl md:text-4xl text-on-surface hover:text-tertiary transition-colors inline-block">+91 8733948884</a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 max-w-2xl mx-auto text-left">
+        <div>
+          <p class="font-body text-label-caps text-tertiary uppercase mb-2">India</p>
+          <p class="font-body text-body-md text-on-surface-variant">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p>
+        </div>
+        <div>
+          <p class="font-body text-label-caps text-tertiary uppercase mb-2">United States</p>
+          <p class="font-body text-body-md text-on-surface-variant">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="md:col-span-4 flex flex-col justify-between">
+    <div>
+      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
+      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
+      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+    </div>
+    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+  </div>
+  <div class="md:col-span-4">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
+    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
+  </div>
+  <div class="md:col-span-4 flex flex-col md:items-end">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
+    <div class="flex flex-col gap-3 md:text-right">
+      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
+      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
+      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
+      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
+      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

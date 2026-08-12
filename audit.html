@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Audit | Grov Media</title>
+<meta name="description" content="The Revenue Audit is a diagnostic call that identifies exactly where your acquisition system is leaking revenue — and what's realistically fixable.">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
+    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
+    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
+    fontSize: {
+      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
+      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
+      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
+      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
+      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
+      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
+      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
+      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
+    }
+  }}
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased selection:bg-tertiary selection:text-ink-black overflow-x-hidden font-body">
+<div id="scroll-progress"></div>
+<div id="cursor-dot"></div>
+
+<nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
+  <div class="hidden md:flex gap-8 items-center">
+    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
+    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
+    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
+    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  </div>
+  <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
+</nav>
+
+<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
+<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
+  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <div class="flex flex-col gap-8">
+    <a href="index.html" class="font-display text-2xl">Home</a>
+    <a href="method.html" class="font-display text-2xl">Method</a>
+    <a href="results.html" class="font-display text-2xl">Results</a>
+    <a href="about.html" class="font-display text-2xl">About</a>
+    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
+    <a href="faq.html" class="font-display text-2xl">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
+  </div>
+</div>
+
+<main class="pt-20">
+  <section class="py-32 px-6 md:px-margin-safe relative overflow-hidden bg-ink-black">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-tertiary via-ink-black to-ink-black"></div>
+    <div class="relative z-10 max-w-4xl reveal">
+      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Diagnostic</p>
+      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">Where money leaks. <span class="italic text-tertiary">Before we fix it.</span></h1>
+      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl">A diagnostic approach to identifying the structural flaws in your current acquisition model. The Revenue Audit identifies which of these is costing the most — and what to fix first.</p>
+    </div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <!-- Six diagnostics -->
+  <section class="py-section-gap px-6 md:px-margin-safe bg-ink-black relative overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+      <div class="diagnostic-card relative p-8 rounded-lg reveal bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">01</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Lead Response Time</div>
+        <p class="font-body text-body-md text-on-surface-variant">Every hour a lead waits drops conversion probability by 10x. If follow-up is manual, leads are leaving before you've replied.</p>
+      </div>
+      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-100 bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">02</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Lead-to-Call Rate</div>
+        <p class="font-body text-body-md text-on-surface-variant">How many interested leads actually book a call? If this number is below 30%, there's a structural breakdown between interest and action.</p>
+      </div>
+      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-200 bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">03</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Call-to-Client Rate</div>
+        <p class="font-body text-body-md text-on-surface-variant">Are calls converting or stalling? Low close rates usually mean leads arrive unprepared — the pre-call system is broken, not the pitch.</p>
+      </div>
+      <div class="diagnostic-card relative p-8 rounded-lg reveal bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">04</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Content Dependency Score</div>
+        <p class="font-body text-body-md text-on-surface-variant">What percentage of your revenue requires you to actively post? If posting stops, does revenue stop? That's a dependency — not a business.</p>
+      </div>
+      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-100 bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">05</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Pipeline Velocity</div>
+        <p class="font-body text-body-md text-on-surface-variant">How long does it take a lead to move from first touch to paying client? Slow pipelines lose momentum, and momentum is where conversion lives.</p>
+      </div>
+      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-200 bg-surface interactive-zone group">
+        <div class="diagnostic-line"></div>
+        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">06</div>
+        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Retention &amp; Expansion Revenue</div>
+        <p class="font-body text-body-md text-on-surface-variant">How much revenue comes from existing clients vs constant new acquisition? Ignoring retention while chasing leads is the most expensive leak of all.</p>
+      </div>
+    </div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <!-- What the call covers -->
+  <section class="py-section-gap px-6 md:px-margin-safe">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+      <div class="md:col-span-4 reveal">
+        <p class="font-body text-label-caps text-tertiary uppercase mb-4">Next Step</p>
+        <h2 class="font-display text-headline-lg text-on-surface md:sticky md:top-32">The Revenue Audit Call.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <ul class="space-y-6 mb-12">
+          <li class="reveal flex gap-4 border-b border-outline-variant/20 pb-6"><span class="material-symbols-outlined text-tertiary">route</span><span class="font-body text-body-md text-on-surface">We map how people move from attention → inquiry → client in your business</span></li>
+          <li class="reveal delay-100 flex gap-4 border-b border-outline-variant/20 pb-6"><span class="material-symbols-outlined text-tertiary">search</span><span class="font-body text-body-md text-on-surface">We identify exactly where conversion or follow-up is breaking down</span></li>
+          <li class="reveal delay-200 flex gap-4 border-b border-outline-variant/20 pb-6"><span class="material-symbols-outlined text-tertiary">build</span><span class="font-body text-body-md text-on-surface">We tell you what we'd fix and what that realistically looks like</span></li>
+          <li class="reveal delay-300 flex gap-4 pb-6"><span class="material-symbols-outlined text-tertiary">forum</span><span class="font-body text-body-md text-on-surface">If we're not the right fit — we'll tell you directly. No pitch.</span></li>
+        </ul>
+        <blockquote class="reveal mb-10">
+          <p class="font-display italic text-2xl text-on-surface leading-snug">"We will look for the leak, name the number worth moving, and tell you whether we can fix it. If there isn't a clear path to revenue movement, we will say no."</p>
+        </blockquote>
+        <a href="contact.html" class="interactive-zone reveal inline-block btn-gold bg-tertiary text-ink-black px-8 py-4 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+        <p class="font-body text-label-caps uppercase text-on-surface-variant/70 tracking-widest mt-6 reveal">Complimentary · No obligation · Focused entirely on your business</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="md:col-span-4 flex flex-col justify-between">
+    <div>
+      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
+      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
+      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+    </div>
+    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+  </div>
+  <div class="md:col-span-4">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
+    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
+  </div>
+  <div class="md:col-span-4 flex flex-col md:items-end">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
+    <div class="flex flex-col gap-3 md:text-right">
+      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
+      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
+      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
+      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
+      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | Grov Media</title>
+<meta name="description" content="Direct answers about Grov Media's Revenue Audit, methodology, timelines, and who we work with.">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
+    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
+    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
+    fontSize: {
+      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
+      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
+      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
+      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
+      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
+      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
+      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
+      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
+    }
+  }}
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased selection:bg-tertiary selection:text-ink-black overflow-x-hidden font-body">
+<div id="scroll-progress"></div>
+<div id="cursor-dot"></div>
+
+<nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
+  <div class="hidden md:flex gap-8 items-center">
+    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
+    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
+    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
+    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  </div>
+  <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
+</nav>
+
+<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
+<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
+  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <div class="flex flex-col gap-8">
+    <a href="index.html" class="font-display text-2xl">Home</a>
+    <a href="method.html" class="font-display text-2xl">Method</a>
+    <a href="results.html" class="font-display text-2xl">Results</a>
+    <a href="about.html" class="font-display text-2xl">About</a>
+    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
+    <a href="faq.html" class="font-display text-2xl">FAQ</a>
+    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
+  </div>
+</div>
+
+<main class="pt-20">
+  <section class="py-32 px-6 md:px-margin-safe relative overflow-hidden">
+    <div class="bg-grain"></div>
+    <div class="radial-glow"></div>
+    <div class="relative z-10 max-w-4xl reveal">
+      <p class="font-body text-label-caps text-tertiary uppercase mb-4">FAQ</p>
+      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">Questions before you <span class="italic text-tertiary">apply.</span></h1>
+      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl">Direct answers. If it's not covered here, ask on the Revenue Audit call.</p>
+    </div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <section class="py-section-gap px-6 md:px-margin-safe max-w-3xl mx-auto">
+    <div id="faq-list" class="reveal"></div>
+  </section>
+  <div class="gold-rule"></div>
+
+  <section class="py-section-gap px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-display-lg-mobile md:text-display-lg mb-8">Still have questions?</h2>
+      <p class="font-body text-body-lg opacity-80 mb-12">Ask them directly on the Revenue Audit call — complimentary, no obligation.</p>
+      <a href="contact.html" class="inline-block bg-ink-black text-warm-ivory px-12 py-5 font-body text-label-caps uppercase hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="md:col-span-4 flex flex-col justify-between">
+    <div>
+      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
+      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
+      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+    </div>
+    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+  </div>
+  <div class="md:col-span-4">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
+    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
+    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
+  </div>
+  <div class="md:col-span-4 flex flex-col md:items-end">
+    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
+    <div class="flex flex-col gap-3 md:text-right">
+      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
+      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
+      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
+      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
+      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  const faqs = [
+    { q: "Who is this built for?", a: "Service businesses already generating revenue — coaches, consultants, practitioners, trainers, educators, personal brands — with some existing traction but inconsistent client flow. Not for pre-revenue businesses or product-based companies." },
+    { q: "What makes Grov different from other agencies?", a: "Most agencies optimize one part of your funnel. We own the entire path from attention to long-term client — acquisition, conversion, lead handling, and retention. You work directly with Mokshita and Jay. No account managers. No handoffs." },
+    { q: "What is the Revenue Audit?", a: "A focused diagnostic call where we map exactly how clients currently move through your business — identifying where leads are leaking, where conversion is breaking down, and what's realistically fixable. If there's a clear opportunity, we'll walk you through what we'd build. If we're not the right fit, we'll say so directly." },
+    { q: "Do I need to already be on GoHighLevel?", a: "No. We set up and fully manage GHL for you. If you're already using other tools, we'll assess whether to migrate or build around your current stack. The goal is always the most effective path — not the most complex one." },
+    { q: "How long until I see results?", a: "Some clients see lead quality and follow-up improvements within the first two weeks. Full funnel builds typically take 2–4 weeks to launch. Consistent client flow builds over 60–90 days as the system is refined and optimised." },
+    { q: "What does day-to-day look like?", a: "We work closely at the start, then operate largely independently — building and refining without needing constant input from you. Retainer clients get regular check-ins, performance updates, and strategic recommendations. You stay in control without being the bottleneck." },
+    { q: "Is there a minimum commitment?", a: "Project builds are one-time engagements with a defined scope and timeline. Monthly retainers run on a minimum 3-month basis — because that's genuinely how long it takes to build and optimise a system worth having." },
+    { q: "Do you work with businesses outside of health and wellness?", a: "Yes. We work with any service business where revenue depends on converting clients — consulting, education, legal, financial services, personal brands. Our methodology applies wherever there is a human selling a service. We do not work with product businesses or e-commerce." }
+  ];
+
+  const faqList = document.getElementById('faq-list');
+  faqs.forEach((item, i) => {
+    const id = `faq-panel-${i}`;
+    const wrap = document.createElement('div');
+    wrap.className = 'accordion-item';
+    wrap.innerHTML = `
+      <h3>
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="${id}" id="faq-trigger-${i}">
+          <span class="font-display text-xl md:text-2xl text-on-surface pr-6">${item.q}</span>
+          <span class="accordion-icon material-symbols-outlined">add</span>
+        </button>
+      </h3>
+      <div class="accordion-panel" id="${id}" role="region" aria-labelledby="faq-trigger-${i}">
+        <div class="accordion-panel-inner">
+          <p class="font-body text-body-md text-on-surface-variant">${item.a}</p>
+        </div>
+      </div>`;
+    faqList.appendChild(wrap);
+  });
+
+  // Re-init accordion listeners now that items are injected
+  initAccordion();
+</script>
+</body>
+</html>
