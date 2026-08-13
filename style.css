@@ -65,6 +65,23 @@ body {
 .hover-lift { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s ease; }
 .hover-lift:hover { transform: translateY(-3px); }
 
+/* ---------- Hero page-load choreography ----------
+   A tighter, faster variant of .reveal for elements that should settle
+   into place on initial load rather than wait for scroll. Applied via
+   JS with per-element delay so the sequence reads: eyebrow, headline,
+   paragraph, primary CTA, secondary CTA, visual, marquee. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s cubic-bezier(0.19,1,0.22,1), transform 0.7s cubic-bezier(0.19,1,0.22,1);
+  }
+  .hero-in.hero-in-active { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-in { opacity: 1; transform: none; }
+}
+
 /* ---------- Image placeholder / real image wrapper ----------
    Editorial placeholder: quiet field + grain + small metadata caption,
    not a loud "GROV / LABEL" watermark. */
@@ -153,14 +170,16 @@ body {
 .graph-active .graph-dot { opacity: 1 !important; transform: scale(1) !important; }
 .graph-dot { opacity: 0; transform: scale(0); transition: opacity 0.4s ease 2s, transform 0.4s cubic-bezier(0.34,1.2,0.64,1) 2s; }
 
-.sparkline-path { stroke-dasharray: 300; stroke-dashoffset: 300; transition: stroke-dashoffset 1.4s cubic-bezier(0.19,1,0.22,1); }
-.graph-active .sparkline-path { stroke-dashoffset: 0; }
+.sparkline-path { stroke-dasharray: 300; stroke-dashoffset: 300; transition: stroke-dashoffset 1.1s cubic-bezier(0.19,1,0.22,1); }
+.graph-active .sparkline-path,
+.case-editorial.active .case-seq-graph .sparkline-path { stroke-dashoffset: 0; }
 
 .funnel-bar { transform-origin: left center; transform: scaleX(0); transition: transform 1.4s cubic-bezier(0.19,1,0.22,1); }
 .graph-active .funnel-bar { transform: scaleX(1); }
 
 @media (prefers-reduced-motion: reduce) {
-  .line-graph-path, .sparkline-path { stroke-dashoffset: 0; transition: none; }
+  .line-graph-path, .sparkline-path,
+  .case-editorial .case-seq-graph .sparkline-path { stroke-dashoffset: 0; transition: none; }
   .hz-bar, .funnel-bar { transition: none; }
   .funnel-bar { transform: scaleX(1); }
 }
@@ -172,6 +191,25 @@ body {
 .group:hover .case-arrow, .group:focus-within .case-arrow { transform: translateX(6px); }
 .case-metric { transition: color 0.4s ease; }
 .group:hover .case-metric, .group:focus-within .case-metric { color: var(--gold); }
+
+/* Internal case-study sequence: image, then title, then metric, then
+   graph/sparkline — driven by the same .active toggle as the parent
+   .reveal, staggered via transition-delay so it reads as one case
+   study being revealed rather than four separate animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .case-editorial .case-seq {
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.6s cubic-bezier(0.19,1,0.22,1), transform 0.6s cubic-bezier(0.19,1,0.22,1);
+  }
+  .case-editorial.active .case-seq { opacity: 1; transform: translateY(0); }
+  .case-editorial .case-seq-img { transition-delay: 0ms; }
+  .case-editorial .case-seq-title { transition-delay: 120ms; }
+  .case-editorial .case-seq-metric { transition-delay: 220ms; }
+  .case-editorial .case-seq-graph { transition-delay: 340ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-editorial .case-seq { opacity: 1; transform: none; }
+}
 
 /* ---------- Cinematic reveal (founders) ---------- */
 .cinematic-reveal { clip-path: inset(6% 0 6% 0); transition: clip-path 1.3s cubic-bezier(0.19,1,0.22,1); }
@@ -186,12 +224,16 @@ body {
 #main-nav.scrolled { background-color: rgba(11,11,14,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(58,58,64,0.5); }
 .nav-link { position: relative; color: var(--grey); transition: color 0.3s ease; }
 .nav-link::after {
-  content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px; background: var(--gold);
-  transition: width 0.35s cubic-bezier(0.19,1,0.22,1);
+  content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.19,1,0.22,1);
 }
 .nav-link:hover { color: var(--text); }
-.nav-link:hover::after, .nav-link[aria-current="page"]::after { width: 100%; }
+.nav-link:hover::after, .nav-link[aria-current="page"]::after { transform: scaleX(1); }
 .nav-link[aria-current="page"] { color: var(--gold); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}
 
 /* Mobile drawer */
 #mobile-drawer { transition: clip-path 0.6s cubic-bezier(0.19,1,0.22,1); clip-path: inset(0 0 0 100%); }
@@ -206,7 +248,7 @@ body {
 #mobile-drawer.open .mobile-link:nth-child(6) { transition-delay: 330ms; }
 
 /* ---------- Scroll progress ---------- */
-#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); width: 0%; z-index: 100; transition: width 0.1s; }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: var(--gold); z-index: 100; transform: scaleX(0); transform-origin: left; transition: transform 0.1s linear; }
 
 /* ---------- Accordion (FAQ) ---------- */
 .accordion-item { border-bottom: 1px solid rgba(58,58,64,0.5); }
@@ -220,14 +262,19 @@ body {
 .video-play-btn { transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; }
 .group:hover .video-play-btn, .group:focus-within .video-play-btn { background-color: var(--gold); color: var(--ink); transform: scale(1.06); }
 
-/* ---------- CTA buttons ---------- */
-.btn-gold { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background-color 0.3s ease, opacity 0.3s ease; }
-.btn-gold:hover { transform: translateY(-2px); opacity: 0.92; }
-.btn-outline { transition: border-color 0.3s ease, color 0.3s ease; border: 1px solid var(--line); }
+/* ---------- CTA buttons ----------
+   Base visual styling only. Motion (hover lift/scale, press, radius) is
+   centralized in the "Button radius + motion system" block below so
+   there is exactly one interaction definition per button, not two. */
+.btn-gold { background: var(--gold); }
+.btn-outline { border: 1px solid var(--line); }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 .btn-text { position: relative; }
 .btn-text::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.19,1,0.22,1); }
 .btn-text:hover::after { transform: scaleX(1); transform-origin: left; }
+/* Arrow glyphs inside text CTAs nudge right on hover — tactile, not decorative */
+.btn-text .btn-arrow { display: inline-block; transition: transform 0.35s cubic-bezier(0.19,1,0.22,1); }
+.btn-text:hover .btn-arrow { transform: translateX(3px); }
 
 /* ---------- Focus states ---------- */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
@@ -301,35 +348,52 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .marquee-track::-webkit-scrollbar { display: none; }
 }
 
-/* ---------- Button radius system ----------
-   Every actual button/CTA gets a consistent pill treatment. Text-style
-   links (.btn-text) are intentionally excluded — they aren't buttons. */
+/* ---------- Button radius + motion system ----------
+   Every actual button/CTA shares one interaction definition:
+   pill radius, subtle lift + scale on hover, tactile press on click,
+   arrow nudge where an icon/arrow child is present. Text-style links
+   (.btn-text) are excluded from radius/lift — they aren't buttons,
+   they have their own underline-reveal treatment above. */
 .btn-gold,
 .btn-outline,
 a.btn-cta-solid {
   border-radius: 999px;
-}
-.btn-gold,
-.btn-outline,
-a.btn-cta-solid {
-  transition: transform 0.3s cubic-bezier(0.19,1,0.22,1), box-shadow 0.3s ease,
-              background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.19,1,0.22,1), box-shadow 0.3s ease,
+              background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 }
 .btn-gold:hover,
 .btn-outline:hover,
 a.btn-cta-solid:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.015);
 }
 .btn-gold:active,
 .btn-outline:active,
 a.btn-cta-solid:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.15s;
 }
-a.btn-cta-solid {
-  transition: transform 0.3s cubic-bezier(0.19,1,0.22,1), background-color 0.3s ease, color 0.3s ease;
+.btn-gold:hover { opacity: 0.94; }
+
+/* Arrow/icon children inside pill buttons nudge right on hover */
+.btn-gold .btn-arrow,
+.btn-outline .btn-arrow,
+a.btn-cta-solid .btn-arrow,
+a.btn-cta-solid .material-symbols-outlined {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.19,1,0.22,1);
 }
+.btn-gold:hover .btn-arrow,
+.btn-outline:hover .btn-arrow,
+a.btn-cta-solid:hover .btn-arrow,
+a.btn-cta-solid:hover .material-symbols-outlined {
+  transform: translateX(3px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-gold, .btn-outline, a.btn-cta-solid { transition: background-color 0.3s ease, color 0.3s ease; }
   .btn-gold:hover, .btn-outline:hover, a.btn-cta-solid:hover,
   .btn-gold:active, .btn-outline:active, a.btn-cta-solid:active { transform: none; }
+  .btn-gold .btn-arrow, .btn-outline .btn-arrow, a.btn-cta-solid .btn-arrow,
+  .btn-gold:hover .btn-arrow, .btn-outline:hover .btn-arrow, a.btn-cta-solid:hover .btn-arrow,
+  a.btn-cta-solid .material-symbols-outlined, a.btn-cta-solid:hover .material-symbols-outlined { transform: none; }
 }

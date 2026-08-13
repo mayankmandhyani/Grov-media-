@@ -130,8 +130,8 @@ function initNav() {
   function onScroll() {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-    if (progress) progress.style.width = scrolled + '%';
+    const scrolled = height > 0 ? winScroll / height : 0;
+    if (progress) progress.style.transform = `scaleX(${scrolled})`;
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -163,6 +163,29 @@ function initMobileMenu() {
   overlay?.addEventListener('click', close);
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
+/* ---------- HERO PAGE-LOAD CHOREOGRAPHY ----------
+   Elements marked .hero-in with a data-hero-order attribute settle
+   into place in sequence on initial load (not scroll-triggered — the
+   hero is above the fold, so this runs immediately). Order: eyebrow,
+   headline, paragraph, primary CTA, secondary CTA, visual, marquee.
+   Kept quick so the page never feels like it's "waiting" to be usable —
+   content is readable well before the sequence finishes. */
+function initHeroChoreography() {
+  const items = document.querySelectorAll('.hero-in[data-hero-order]');
+  if (!items.length) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    items.forEach(el => el.classList.add('hero-in-active'));
+    return;
+  }
+  const STEP = 90; // ms between each element in the sequence
+  const BASE = 60; // small initial delay so it doesn't feel instant/jarring
+  items.forEach(el => {
+    const order = parseInt(el.getAttribute('data-hero-order'), 10) || 0;
+    setTimeout(() => el.classList.add('hero-in-active'), BASE + order * STEP);
+  });
 }
 
 /* ---------- SCROLL REVEAL ---------- */
@@ -380,6 +403,7 @@ function markActiveNav() {
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initMobileMenu();
+  initHeroChoreography();
   initReveal();
   initAccordion();
   initSpineCycle();
