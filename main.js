@@ -389,6 +389,248 @@ function initMarquee() {
   ).join('');
   track.innerHTML = renderSet() + renderSet();
 }
+/* ---------- KINETIC GRID (hero background canvas) ----------
+   Ported from a React/canvas reference component to vanilla JS.
+   Scoped to the hero section only — not a full-page background —
+   so body copy, cards, and data elsewhere stay undistracted.
+   Desktop: cursor warp + click ripple, continuous rAF loop.
+   Touch: tap ripple only, no continuous per-frame tracking (battery).
+   Fully disabled under prefers-reduced-motion. */
+function initKineticGrid() {
+  const canvas = document.getElementById('kinetic-grid');
+  if (!canvas) return;
+  const section = canvas.closest('section');
+  if (!section) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  // Grov palette — gold accent on ink, not the reference component's blue.
+  const LINE_BASE = { r: 236, g: 233, b: 226, a: 0.06 };
+  const LINE_ACTIVE = { r: 201, g: 169, b: 97, a: 0.55 };
+  const NODE_BASE = { r: 236, g: 233, b: 226, a: 0.10 };
+  const NODE_ACTIVE = { r: 201, g: 169, b: 97, a: 0.9 };
+  const GLOW = '201,169,97';
+  const RIPPLE = '201,169,97';
+
+  // Smaller/sparser grid on touch — fewer cells to draw, cheaper per frame.
+  const CELL_SIZE = isTouch ? 68 : 58;
+  const INFLUENCE_RADIUS = isTouch ? 0 : 240; // 0 = cursor warp effectively off on touch
+  const MAX_WARP = 20;
+  const LERP_SPEED = 0.08;
+
+  let W = 0, H = 0;
+  let mouse = { x: -9999, y: -9999 };
+  let targetMouse = { x: -9999, y: -9999 };
+  let ripples = [];
+  let rafId = null;
+  let running = false;
+
+  function lerpN(a, b, t) { return a + (b - a) * t; }
+  function lerpColor(base, active, t) {
+    const r = Math.round(lerpN(base.r, active.r, t));
+    const g = Math.round(lerpN(base.g, active.g, t));
+    const b = Math.round(lerpN(base.b, active.b, t));
+    const a = lerpN(base.a, active.a, t);
+    return `rgba(${r},${g},${b},${a.toFixed(3)})`;
+  }
+
+  function setSize() {
+    const rect = section.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR — perf on high-density phones
+    W = rect.width;
+    H = rect.height;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function getWarpedPoint(gx, gy, col, row, cols, rows) {
+    const edgeMargin = 1.5;
+    const colPin = Math.min(col / edgeMargin, (cols - 1 - col) / edgeMargin, 1);
+    const rowPin = Math.min(row / edgeMargin, (rows - 1 - row) / edgeMargin, 1);
+    const pinFactor = colPin * colPin * rowPin * rowPin;
+
+    const dx = gx - mouse.x;
+    const dy = gy - mouse.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const proximity = INFLUENCE_RADIUS > 0 ? Math.max(0, 1 - dist / INFLUENCE_RADIUS) * pinFactor : 0;
+
+    let rx = 0, ry = 0;
+    for (const r of ripples) {
+      const rdx = gx - r.x;
+      const rdy = gy - r.y;
+      const rdist = Math.sqrt(rdx * rdx + rdy * rdy);
+      const waveWidth = 50;
+      const diff = rdist - r.radius;
+      if (Math.abs(diff) < waveWidth) {
+        const strength = (1 - Math.abs(diff) / waveWidth) * r.opacity * 16 * pinFactor;
+        const angle = Math.atan2(rdy, rdx);
+        const sign = diff < 0 ? -1 : 1;
+        rx += Math.cos(angle) * strength * sign * -1;
+        ry += Math.sin(angle) * strength * sign * -1;
+      }
+    }
+
+    if (INFLUENCE_RADIUS > 0 && dist < INFLUENCE_RADIUS && dist > 0 && pinFactor > 0) {
+      const t = dist / INFLUENCE_RADIUS;
+      const eased = t < 0.01 ? 0 : (1 - t) * (1 - t) * Math.min(1, dist / 60);
+      const warpAmt = eased * MAX_WARP * pinFactor;
+      const angle = Math.atan2(dy, dx);
+      return {
+        pt: { x: gx - Math.cos(angle) * warpAmt + rx, y: gy - Math.sin(angle) * warpAmt + ry },
+        proximity
+      };
+    }
+    return { pt: { x: gx + rx, y: gy + ry }, proximity };
+  }
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const r = ripples[i];
+      const age = (now - r.born) / 1000;
+      r.radius = Math.max(0, age * 380);
+      r.opacity = Math.max(0, 1 - age * 1.3);
+      if (r.opacity <= 0) ripples.splice(i, 1);
+    }
+
+    const cols = Math.max(2, Math.ceil(W / CELL_SIZE)) + 1;
+    const rows = Math.max(2, Math.ceil(H / CELL_SIZE)) + 1;
+    const cellW = W / (cols - 1);
+    const cellH = H / (rows - 1);
+
+    const pts = [];
+    const prox = [];
+    for (let row = 0; row < rows; row++) {
+      pts[row] = []; prox[row] = [];
+      for (let col = 0; col < cols; col++) {
+        const { pt, proximity } = getWarpedPoint(col * cellW, row * cellH, col, row, cols, rows);
+        pts[row][col] = pt;
+        prox[row][col] = proximity;
+      }
+    }
+
+    function drawSeg(p1, p2, pr1, pr2) {
+      const avg = (pr1 + pr2) / 2;
+      const t = avg * avg * (3 - 2 * avg);
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.strokeStyle = lerpColor(LINE_BASE, LINE_ACTIVE, t);
+      ctx.lineWidth = lerpN(0.7, 1.3, t);
+      ctx.stroke();
+    }
+    ctx.lineCap = 'butt';
+    for (let row = 0; row < rows; row++)
+      for (let col = 0; col < cols - 1; col++)
+        drawSeg(pts[row][col], pts[row][col + 1], prox[row][col], prox[row][col + 1]);
+    for (let col = 0; col < cols; col++)
+      for (let row = 0; row < rows - 1; row++)
+        drawSeg(pts[row][col], pts[row + 1][col], prox[row][col], prox[row + 1][col]);
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const p = pts[row][col];
+        const pr = prox[row][col];
+        const t = pr * pr * (3 - 2 * pr);
+        const r = lerpN(1.5, 2.6, t);
+        if (t > 0.3) {
+          const glowR = r + lerpN(0, 5, (t - 0.3) / 0.7);
+          const grd = ctx.createRadialGradient(p.x, p.y, r * 0.5, p.x, p.y, glowR);
+          grd.addColorStop(0, `rgba(${GLOW},${(t * 0.25).toFixed(3)})`);
+          grd.addColorStop(1, `rgba(${GLOW},0)`);
+          ctx.beginPath(); ctx.arc(p.x, p.y, glowR, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = lerpColor(NODE_BASE, NODE_ACTIVE, t);
+        ctx.fill();
+      }
+    }
+
+    for (const r of ripples) {
+      const safeRadius = Math.max(0, r.radius);
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, safeRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${RIPPLE},${(r.opacity * 0.22).toFixed(3)})`;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+  }
+
+  function animate(now) {
+    if (!running) return;
+    mouse.x = lerpN(mouse.x, targetMouse.x, LERP_SPEED);
+    mouse.y = lerpN(mouse.y, targetMouse.y, LERP_SPEED);
+    draw(now);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    rafId = requestAnimationFrame(animate);
+  }
+  function stop() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+  }
+
+  setSize();
+
+  // Desktop: live cursor tracking, scoped to the hero section (not window).
+  if (!isTouch) {
+    section.addEventListener('mousemove', (e) => {
+      const rect = section.getBoundingClientRect();
+      targetMouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    });
+    section.addEventListener('mouseleave', () => {
+      targetMouse = { x: -9999, y: -9999 };
+    });
+  }
+
+  // Both desktop and touch: click/tap ripple.
+  section.addEventListener(isTouch ? 'touchstart' : 'click', (e) => {
+    const rect = section.getBoundingClientRect();
+    const point = isTouch ? e.touches[0] : e;
+    ripples.push({
+      x: point.clientX - rect.left,
+      y: point.clientY - rect.top,
+      radius: 0,
+      opacity: 1,
+      born: performance.now()
+    });
+    if (!running) start(); // wake the loop for the ripple even if idle
+  }, { passive: true });
+
+  window.addEventListener('resize', setSize);
+
+  // Pause the rAF loop entirely when the hero scrolls out of view —
+  // meaningful battery/CPU saving, since this is the one continuously-
+  // running animation on the site.
+  const visibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) start(); else stop();
+    });
+  }, { threshold: 0 });
+  visibilityObserver.observe(section);
+
+  // On touch, skip the continuous loop entirely until a ripple needs it —
+  // draw one static frame so the grid is visible at rest.
+  if (isTouch) {
+    draw(performance.now());
+  } else {
+    start();
+  }
+}
+
 function markActiveNav() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('[data-nav-link]').forEach(link => {
@@ -412,5 +654,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFounderParallax();
   initCursor();
   initMarquee();
+  initKineticGrid();
   markActiveNav();
 });
