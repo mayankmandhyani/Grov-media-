@@ -12,20 +12,9 @@
 tailwind.config = {
   darkMode: "class",
   theme: { extend: {
-    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
-    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
-    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
-    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
-    fontSize: {
-      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
-      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
-      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
-      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
-      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
-      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
-      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
-      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
-    }
+    colors: { "ink-black":"#0b0b0e","surface":"#0b0b0e","surface-container":"#16161a","surface-container-low":"#141417","surface-container-high":"#1e1e22","on-surface":"#ece9e2","on-surface-variant":"#9a9a9f","outline":"#6f6f74","outline-variant":"#3a3a40","tertiary":"#c9a961","warm-ivory":"#FAF8F3" },
+    spacing: { "margin-safe":"64px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] }
   }}
 }
 </script>
@@ -36,160 +25,156 @@ tailwind.config = {
 <div id="cursor-dot"></div>
 
 <nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
-  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
-  <div class="hidden md:flex gap-8 items-center">
-    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
-    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
-    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
-    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-lg md:text-xl tracking-tight text-on-surface">Grov Media</span></a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a data-nav-link href="method.html" class="nav-link font-body text-[13px] pb-1">Method</a>
+    <a data-nav-link href="results.html" class="nav-link font-body text-[13px] pb-1">Results</a>
+    <a data-nav-link href="about.html" class="nav-link font-body text-[13px] pb-1" aria-current="page">About</a>
+    <a data-nav-link href="faq.html" class="nav-link font-body text-[13px] pb-1">FAQ</a>
+    <a href="audit.html" class="interactive-zone btn-outline text-on-surface px-5 py-2.5 font-body text-[13px]">Apply for a Revenue Audit</a>
   </div>
   <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
 </nav>
 
-<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
-<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
-  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
-  <div class="flex flex-col gap-8">
-    <a href="index.html" class="font-display text-2xl">Home</a>
-    <a href="method.html" class="font-display text-2xl">Method</a>
-    <a href="results.html" class="font-display text-2xl">Results</a>
-    <a href="about.html" class="font-display text-2xl">About</a>
-    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
-    <a href="faq.html" class="font-display text-2xl">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
-  </div>
+<div id="mobile-drawer" class="fixed inset-0 bg-ink-black z-50 md:hidden flex flex-col p-8">
+  <div class="flex justify-between items-center mb-20"><span class="font-display text-lg">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <nav class="flex flex-col gap-2">
+    <a href="index.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Home</a>
+    <a href="method.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Method</a>
+    <a href="results.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Results</a>
+    <a href="about.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30 text-tertiary">About</a>
+    <a href="audit.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Revenue Audit</a>
+    <a href="faq.html" class="mobile-link font-display text-3xl py-3">FAQ</a>
+  </nav>
+  <a href="audit.html" class="mobile-link btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-[13px] text-center mt-auto">Apply for a Revenue Audit</a>
 </div>
 
 <main class="pt-20">
   <!-- Hero -->
-  <section class="py-32 px-6 md:px-margin-safe relative overflow-hidden">
+  <section class="pad-tight px-6 md:px-margin-safe relative overflow-hidden">
     <div class="bg-grain"></div>
-    <div class="radial-glow"></div>
-    <div class="relative z-10 max-w-4xl reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">The People Behind It</p>
-      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">Built by founders, <span class="italic text-tertiary">for founders.</span></h1>
+    <div class="relative z-10 max-w-3xl reveal">
+      <p class="eyebrow on-gold mb-4">The People Behind It</p>
+      <h1 class="font-display title-major text-[40px] md:text-[58px] leading-[1.05] text-on-surface text-balance">Built by founders, <span class="italic">for founders.</span></h1>
     </div>
   </section>
-  <div class="gold-rule"></div>
+
+  <!-- Founder 1: large portrait, overlapping bio -->
+  <section class="px-6 md:px-margin-safe pad-normal">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-6 reveal cinematic-reveal group" id="founder-1">
+        <div class="aspect-[3/4] img-frame"><span class="img-caption">Grov Media <span class="divider">/</span> Mokshita Paswani</span></div>
+      </div>
+      <div class="md:col-span-5 md:col-start-8 md:pt-24 reveal delay-200">
+        <p class="eyebrow on-gold mb-3">Strategy · Messaging · Psychology</p>
+        <h2 class="font-display text-3xl text-on-surface mb-6">Mokshita Paswani</h2>
+        <p class="font-body text-[15px] leading-relaxed text-on-surface-variant mb-6">The strategic and creative mind of Grov Media. Mokshita combines sales psychology with genuine human intuition — turning positioning into clarity, and clarity into conversion.</p>
+        <p class="font-body text-[15px] leading-relaxed text-on-surface-variant">She is the reason clients feel understood before they've ever signed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote break, full-bleed -->
+  <section class="px-6 md:px-margin-safe pad-tight bg-surface-container-low">
+    <blockquote class="max-w-2xl mx-auto text-center reveal">
+      <p class="font-display italic text-2xl md:text-3xl text-on-surface leading-snug">"Most agencies optimize one piece. We optimize the entire path. That's the moat."</p>
+    </blockquote>
+  </section>
+
+  <!-- Founder 2: reversed rhythm — bio leads, portrait trails, offset lower -->
+  <section class="px-6 md:px-margin-safe pad-normal">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-5 md:pt-24 reveal order-2 md:order-1">
+        <p class="eyebrow on-gold mb-3">Systems · Automation · Architecture</p>
+        <h2 class="font-display text-3xl text-on-surface mb-6">Jay Mohnani</h2>
+        <p class="font-body text-[15px] leading-relaxed text-on-surface-variant mb-6">The builder. Jay is obsessed with making things work seamlessly — GHL builds, AI conversation systems, automation logic, and dashboards that track what actually matters.</p>
+        <p class="font-body text-[15px] leading-relaxed text-on-surface-variant">His systems don't just function. They scale.</p>
+      </div>
+      <div class="md:col-span-6 md:col-start-7 reveal delay-200 cinematic-reveal group order-1 md:order-2" id="founder-2">
+        <div class="aspect-[3/4] img-frame"><span class="img-caption">Grov Media <span class="divider">/</span> Jay Mohnani</span></div>
+      </div>
+    </div>
+  </section>
+  <div class="thin-rule"></div>
 
   <!-- Origin story -->
-  <section class="py-section-gap px-6 md:px-margin-safe">
+  <section class="pad-normal px-6 md:px-margin-safe">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
       <div class="md:col-span-4 reveal">
-        <p class="font-body text-label-caps text-tertiary uppercase mb-4">Origin</p>
-        <h2 class="font-display text-headline-lg text-on-surface md:sticky md:top-32">The moat is the whole path.</h2>
+        <p class="eyebrow mb-4">Origin</p>
+        <h2 class="font-display title-minor text-[28px] text-on-surface leading-tight">Why Grov exists.</h2>
       </div>
-      <div class="md:col-span-8 reveal delay-100">
-        <p class="font-body text-body-lg text-on-surface-variant mb-6">We started as a social media agency. We watched talented service business owners create brilliant content — and still not grow consistently. Not because their content was wrong. Because everything else was disconnected.</p>
-        <p class="font-body text-body-lg text-on-surface-variant mb-10">Content attracts. But broken messaging, no funnel, and zero follow-up means warm leads go cold every day. We saw it over and over. So we built the answer.</p>
-        <blockquote class="border-l-2 border-tertiary pl-8 mb-10">
-          <p class="font-display italic text-2xl md:text-3xl text-on-surface leading-snug">"Most agencies optimize one piece. We optimize the entire path. That's the moat."</p>
-        </blockquote>
-        <p class="font-body text-body-lg text-on-surface-variant">Today Grov Media is a global client acquisition systems agency — strategy, psychology, copy, GHL builds, AI automation, and monthly management. We build the engine. You run the business.</p>
+      <div class="md:col-span-7 md:col-start-6 reveal delay-100">
+        <p class="font-body text-[16px] leading-relaxed text-on-surface-variant mb-6">We started as a social media agency. We watched talented service business owners create brilliant content — and still not grow consistently. Not because their content was wrong. Because everything else was disconnected.</p>
+        <p class="font-body text-[16px] leading-relaxed text-on-surface-variant mb-10">Content attracts. But broken messaging, no funnel, and zero follow-up means warm leads go cold every day. We saw it over and over. So we built the answer.</p>
+        <p class="font-body text-[16px] leading-relaxed text-on-surface-variant">Today Grov Media is a global client acquisition systems agency — strategy, psychology, copy, GHL builds, AI automation, and monthly management. We build the engine. You run the business.</p>
       </div>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <!-- Founders -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low" id="founders">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 max-w-5xl mx-auto">
-      <div class="group reveal cinematic-reveal" id="founder-1">
-        <div class="aspect-[3/4] img-frame img-placeholder rounded-lg mb-6"><span class="img-label">Grov Media / Mokshita Paswani</span></div>
-        <h3 class="font-display text-headline-md text-on-surface mb-2">Mokshita Paswani</h3>
-        <p class="font-body text-label-caps text-tertiary uppercase tracking-widest mb-4">Strategy · Messaging · Psychology</p>
-        <p class="font-body text-body-md text-on-surface-variant">The strategic and creative mind of Grov Media. Mokshita combines sales psychology with genuine human intuition — turning positioning into clarity, and clarity into conversion. She is the reason clients feel understood before they've ever signed.</p>
-      </div>
-      <div class="group reveal delay-200 cinematic-reveal md:mt-32" id="founder-2">
-        <div class="aspect-[3/4] img-frame img-placeholder rounded-lg mb-6"><span class="img-label">Grov Media / Jay Mohnani</span></div>
-        <h3 class="font-display text-headline-md text-on-surface mb-2">Jay Mohnani</h3>
-        <p class="font-body text-label-caps text-tertiary uppercase tracking-widest mb-4">Systems · Automation · Architecture</p>
-        <p class="font-body text-body-md text-on-surface-variant">The builder. Jay is obsessed with making things work seamlessly — GHL builds, AI conversation systems, automation logic, and dashboards that track what actually matters. His systems don't just function. They scale.</p>
-      </div>
+  <!-- Differentiators — quiet list, not cards -->
+  <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low">
+    <div class="max-w-2xl mb-16 reveal">
+      <p class="eyebrow on-gold mb-4">What Makes Us Different</p>
+      <h2 class="font-display title-minor text-[28px] text-on-surface leading-tight">Systems that understand how people decide — and move them.</h2>
     </div>
-    <div class="max-w-3xl mx-auto text-center mt-24 reveal">
-      <p class="font-display text-2xl md:text-3xl italic text-on-surface leading-snug">We didn't build Grov to run an agency. We built it to give founders their <span class="text-tertiary">freedom back.</span></p>
-      <p class="font-body text-body-md text-on-surface-variant mt-6">Every system we build is built the way we'd want it built for ourselves — with strategy, care, and a genuine understanding of what it costs to carry a business alone.</p>
+    <div class="max-w-3xl">
+      <div class="reveal py-7 border-t border-outline-variant/40"><p class="font-display text-lg text-on-surface mb-1">Buyer psychology mapping</p><p class="font-body text-[14px] text-on-surface-variant leading-relaxed">How your ideal client actually decides — what builds trust, what stalls them. Every system is built around this map.</p></div>
+      <div class="reveal delay-100 py-7 border-t border-outline-variant/40"><p class="font-display text-lg text-on-surface mb-1">Messaging built on real language</p><p class="font-body text-[14px] text-on-surface-variant leading-relaxed">Copy from how clients actually describe their problem — not guesswork.</p></div>
+      <div class="reveal delay-200 py-7 border-t border-b border-outline-variant/40"><p class="font-display text-lg text-on-surface mb-1">Automation that feels human</p><p class="font-body text-[14px] text-on-surface-variant leading-relaxed">AI conversations that read like someone who understands the client's world — because we built them that way.</p></div>
     </div>
   </section>
-  <div class="gold-rule"></div>
-
-  <!-- Differentiators -->
-  <section class="py-section-gap px-6 md:px-margin-safe">
-    <div class="max-w-3xl mb-16 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">What Makes Us Different</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">We don't just build systems. <span class="italic text-tertiary">We build systems that understand how people make decisions — and move them.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">Most agencies build the infrastructure. We go further — understanding the psychology behind why buyers act, hesitate, or disappear. Every system we build is engineered around human decision-making, not just automation logic.</p>
-    </div>
-    <blockquote class="max-w-3xl mb-16 reveal">
-      <p class="font-display italic text-2xl text-on-surface leading-snug">"The right message, at the right moment, to someone who is psychologically ready — that is where conversion actually happens."</p>
-      <p class="font-body text-body-md text-on-surface-variant mt-4">This is why our systems don't just generate leads. They generate clients. The distinction is everything.</p>
-    </blockquote>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
-      <div class="reveal border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Buyer Psychology Mapping</h3><p class="font-body text-body-md text-on-surface-variant">We map exactly how your ideal client makes decisions — what creates trust, what triggers hesitation, what accelerates action. Every system is built around this map.</p></div>
-      <div class="reveal delay-100 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Messaging That Moves People</h3><p class="font-body text-body-md text-on-surface-variant">Copy and messaging built on real buyer language — not guesswork. We study what your clients say, how they describe their problem, and what makes them feel safe enough to act.</p></div>
-      <div class="reveal delay-200 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Conversion at Every Touchpoint</h3><p class="font-body text-body-md text-on-surface-variant">Every email, landing page, DM response, and sequence is designed to move someone one step closer to a decision — not just deliver information.</p></div>
-      <div class="reveal delay-300 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Systems That Feel Human</h3><p class="font-body text-body-md text-on-surface-variant">Automation that doesn't feel automated. AI conversations that read like a real person who understands the client's world — because we've built them that way.</p></div>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
   <!-- Global reach -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low" id="globe">
-    <div class="max-w-3xl mb-16 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Global Reach</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Serving service businesses <span class="italic text-tertiary">across six continents.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">From North America to the Middle East, Europe to Asia Pacific — the system works wherever there is a service business and a growth gap.</p>
-    </div>
-    <div class="flex flex-wrap gap-4 reveal">
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇺🇸 United States</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇬🇧 United Kingdom</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇨🇦 Canada</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇦🇺 Australia</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇦🇪 United Arab Emirates</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇮🇳 India</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇩🇪 Germany</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇨🇭 Switzerland</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🇮🇪 Ireland</span>
-      <span class="border border-outline-variant/40 px-5 py-3 rounded-full font-body text-body-md text-on-surface">🌍 Africa</span>
+  <section class="pad-normal px-6 md:px-margin-safe">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+      <div class="md:col-span-4 reveal">
+        <p class="eyebrow mb-4">Global Reach</p>
+        <p class="font-display text-2xl text-on-surface leading-snug">Serving service businesses <span class="italic text-tertiary">across six continents.</span></p>
+      </div>
+      <div class="md:col-span-7 md:col-start-6 reveal delay-100">
+        <p class="font-body text-[15px] text-on-surface-variant leading-relaxed">United States · United Kingdom · Canada · Australia · United Arab Emirates · India · Germany · Switzerland · Ireland · and growing across Africa.</p>
+      </div>
     </div>
   </section>
-  <div class="gold-rule"></div>
 
-  <section class="py-section-gap px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="font-display text-display-lg-mobile md:text-display-lg mb-8">Ready to work with us?</h2>
-      <a href="contact.html" class="inline-block bg-ink-black text-warm-ivory px-12 py-5 font-body text-label-caps uppercase hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
+  <section class="pad-loose px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display title-major text-[38px] md:text-[56px] leading-[1.08] mb-10">Ready to work with us?</h2>
+      <a href="audit.html" class="inline-block bg-ink-black text-warm-ivory px-10 py-4 font-body text-[13px] hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
     </div>
   </section>
 </main>
 
-<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
-  <div class="md:col-span-4 flex flex-col justify-between">
-    <div>
-      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
-      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
-      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+<footer class="w-full pt-20 pb-10 bg-ink-black border-t border-outline-variant/30 px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+    <div class="md:col-span-4">
+      <span class="font-display text-lg text-on-surface">Grov Media</span>
+      <p class="font-body text-[14px] mt-4 max-w-xs leading-relaxed">We help service businesses generate more predictable clients.</p>
     </div>
-    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+    <div class="md:col-span-4">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Find Us</p>
+      <p class="font-body text-[13px] mb-4 leading-relaxed">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad, Gujarat 382330</p>
+      <p class="font-body text-[13px] leading-relaxed">5 Penn Plaza, 14th Floor<br>New York, NY 10001</p>
+    </div>
+    <div class="md:col-span-4 md:text-right">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Navigate</p>
+      <div class="flex flex-col gap-2 font-body text-[13px]">
+        <a href="method.html" class="hover:text-tertiary transition-colors">Method</a>
+        <a href="results.html" class="hover:text-tertiary transition-colors">Results</a>
+        <a href="about.html" class="hover:text-tertiary transition-colors">About</a>
+        <a href="faq.html" class="hover:text-tertiary transition-colors">FAQ</a>
+        <a href="tel:+918733948884" class="hover:text-tertiary transition-colors">+91 8733948884</a>
+      </div>
+    </div>
   </div>
-  <div class="md:col-span-4">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
-    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
-  </div>
-  <div class="md:col-span-4 flex flex-col md:items-end">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
-    <div class="flex flex-col gap-3 md:text-right">
-      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
-      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
-      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
-      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
-      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
-      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
-      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 border-t border-outline-variant/20">
+    <p class="font-body text-[12px] text-on-surface-variant/50">© 2026 GrovMedia.com — All Rights Reserved.</p>
+    <div class="flex gap-6 font-body text-[12px] text-on-surface-variant/50">
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Cookie Policy</a>
     </div>
   </div>
 </footer>

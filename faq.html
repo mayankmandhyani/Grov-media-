@@ -12,20 +12,9 @@
 tailwind.config = {
   darkMode: "class",
   theme: { extend: {
-    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
-    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
-    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
-    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
-    fontSize: {
-      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
-      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
-      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
-      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
-      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
-      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
-      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
-      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
-    }
+    colors: { "ink-black":"#0b0b0e","surface":"#0b0b0e","surface-container":"#16161a","surface-container-low":"#141417","surface-container-high":"#1e1e22","on-surface":"#ece9e2","on-surface-variant":"#9a9a9f","outline":"#6f6f74","outline-variant":"#3a3a40","tertiary":"#c9a961","warm-ivory":"#FAF8F3" },
+    spacing: { "margin-safe":"64px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] }
   }}
 }
 </script>
@@ -36,82 +25,82 @@ tailwind.config = {
 <div id="cursor-dot"></div>
 
 <nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
-  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
-  <div class="hidden md:flex gap-8 items-center">
-    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
-    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
-    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
-    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-lg md:text-xl tracking-tight text-on-surface">Grov Media</span></a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a data-nav-link href="method.html" class="nav-link font-body text-[13px] pb-1">Method</a>
+    <a data-nav-link href="results.html" class="nav-link font-body text-[13px] pb-1">Results</a>
+    <a data-nav-link href="about.html" class="nav-link font-body text-[13px] pb-1">About</a>
+    <a data-nav-link href="faq.html" class="nav-link font-body text-[13px] pb-1" aria-current="page">FAQ</a>
+    <a href="audit.html" class="interactive-zone btn-outline text-on-surface px-5 py-2.5 font-body text-[13px]">Apply for a Revenue Audit</a>
   </div>
   <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
 </nav>
 
-<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
-<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
-  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
-  <div class="flex flex-col gap-8">
-    <a href="index.html" class="font-display text-2xl">Home</a>
-    <a href="method.html" class="font-display text-2xl">Method</a>
-    <a href="results.html" class="font-display text-2xl">Results</a>
-    <a href="about.html" class="font-display text-2xl">About</a>
-    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
-    <a href="faq.html" class="font-display text-2xl">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
-  </div>
+<div id="mobile-drawer" class="fixed inset-0 bg-ink-black z-50 md:hidden flex flex-col p-8">
+  <div class="flex justify-between items-center mb-20"><span class="font-display text-lg">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <nav class="flex flex-col gap-2">
+    <a href="index.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Home</a>
+    <a href="method.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Method</a>
+    <a href="results.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Results</a>
+    <a href="about.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">About</a>
+    <a href="audit.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Revenue Audit</a>
+    <a href="faq.html" class="mobile-link font-display text-3xl py-3 text-tertiary">FAQ</a>
+  </nav>
+  <a href="audit.html" class="mobile-link btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-[13px] text-center mt-auto">Apply for a Revenue Audit</a>
 </div>
 
 <main class="pt-20">
-  <section class="py-32 px-6 md:px-margin-safe relative overflow-hidden">
+  <section class="pad-tight px-6 md:px-margin-safe relative overflow-hidden">
     <div class="bg-grain"></div>
-    <div class="radial-glow"></div>
-    <div class="relative z-10 max-w-4xl reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">FAQ</p>
-      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">Questions before you <span class="italic text-tertiary">apply.</span></h1>
-      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl">Direct answers. If it's not covered here, ask on the Revenue Audit call.</p>
+    <div class="relative z-10 max-w-3xl reveal">
+      <p class="eyebrow on-gold mb-4">FAQ</p>
+      <h1 class="font-display title-major text-[40px] md:text-[58px] leading-[1.05] text-on-surface mb-8 text-balance">Questions before you <span class="italic">apply.</span></h1>
+      <p class="font-body text-lg text-on-surface-variant max-w-xl leading-relaxed">Direct answers. If it's not covered here, ask on the Revenue Audit call.</p>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <section class="py-section-gap px-6 md:px-margin-safe max-w-3xl mx-auto">
+  <section class="pad-normal px-6 md:px-margin-safe max-w-2xl mx-auto">
     <div id="faq-list" class="reveal"></div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <section class="py-section-gap px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="font-display text-display-lg-mobile md:text-display-lg mb-8">Still have questions?</h2>
-      <p class="font-body text-body-lg opacity-80 mb-12">Ask them directly on the Revenue Audit call — complimentary, no obligation.</p>
-      <a href="contact.html" class="inline-block bg-ink-black text-warm-ivory px-12 py-5 font-body text-label-caps uppercase hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
+  <section class="pad-loose px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display title-major text-[38px] md:text-[56px] leading-[1.08] mb-8">Still have questions?</h2>
+      <p class="font-body text-lg opacity-70 mb-10">Ask them directly on the Revenue Audit call — complimentary, no obligation.</p>
+      <a href="audit.html" class="inline-block bg-ink-black text-warm-ivory px-10 py-4 font-body text-[13px] hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
     </div>
   </section>
 </main>
 
-<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
-  <div class="md:col-span-4 flex flex-col justify-between">
-    <div>
-      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
-      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
-      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+<footer class="w-full pt-20 pb-10 bg-ink-black border-t border-outline-variant/30 px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+    <div class="md:col-span-4">
+      <span class="font-display text-lg text-on-surface">Grov Media</span>
+      <p class="font-body text-[14px] mt-4 max-w-xs leading-relaxed">We help service businesses generate more predictable clients.</p>
     </div>
-    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+    <div class="md:col-span-4">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Find Us</p>
+      <p class="font-body text-[13px] mb-4 leading-relaxed">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad, Gujarat 382330</p>
+      <p class="font-body text-[13px] leading-relaxed">5 Penn Plaza, 14th Floor<br>New York, NY 10001</p>
+    </div>
+    <div class="md:col-span-4 md:text-right">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Navigate</p>
+      <div class="flex flex-col gap-2 font-body text-[13px]">
+        <a href="method.html" class="hover:text-tertiary transition-colors">Method</a>
+        <a href="results.html" class="hover:text-tertiary transition-colors">Results</a>
+        <a href="about.html" class="hover:text-tertiary transition-colors">About</a>
+        <a href="faq.html" class="hover:text-tertiary transition-colors">FAQ</a>
+        <a href="tel:+918733948884" class="hover:text-tertiary transition-colors">+91 8733948884</a>
+      </div>
+    </div>
   </div>
-  <div class="md:col-span-4">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
-    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
-  </div>
-  <div class="md:col-span-4 flex flex-col md:items-end">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
-    <div class="flex flex-col gap-3 md:text-right">
-      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
-      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
-      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
-      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
-      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
-      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
-      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 border-t border-outline-variant/20">
+    <p class="font-body text-[12px] text-on-surface-variant/50">© 2026 GrovMedia.com — All Rights Reserved.</p>
+    <div class="flex gap-6 font-body text-[12px] text-on-surface-variant/50">
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Cookie Policy</a>
     </div>
   </div>
 </footer>
@@ -143,13 +132,12 @@ tailwind.config = {
       </h3>
       <div class="accordion-panel" id="${id}" role="region" aria-labelledby="faq-trigger-${i}">
         <div class="accordion-panel-inner">
-          <p class="font-body text-body-md text-on-surface-variant">${item.a}</p>
+          <p class="font-body text-[15px] leading-relaxed text-on-surface-variant">${item.a}</p>
         </div>
       </div>`;
     faqList.appendChild(wrap);
   });
 
-  // Re-init accordion listeners now that items are injected
   initAccordion();
 </script>
 </body>

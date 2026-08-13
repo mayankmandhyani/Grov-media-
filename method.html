@@ -12,20 +12,9 @@
 tailwind.config = {
   darkMode: "class",
   theme: { extend: {
-    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
-    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
-    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
-    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
-    fontSize: {
-      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
-      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
-      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
-      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
-      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
-      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
-      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
-      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
-    }
+    colors: { "ink-black":"#0b0b0e","surface":"#0b0b0e","surface-container":"#16161a","surface-container-low":"#141417","surface-container-high":"#1e1e22","on-surface":"#ece9e2","on-surface-variant":"#9a9a9f","outline":"#6f6f74","outline-variant":"#3a3a40","tertiary":"#c9a961","warm-ivory":"#FAF8F3" },
+    spacing: { "margin-safe":"64px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] }
   }}
 }
 </script>
@@ -36,221 +25,178 @@ tailwind.config = {
 <div id="cursor-dot"></div>
 
 <nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
-  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span></a>
-  <div class="hidden md:flex gap-8 items-center">
-    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
-    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
-    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
-    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  <a href="index.html" class="flex items-center gap-3"><span class="font-display text-lg md:text-xl tracking-tight text-on-surface">Grov Media</span></a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a data-nav-link href="method.html" class="nav-link font-body text-[13px] pb-1" aria-current="page">Method</a>
+    <a data-nav-link href="results.html" class="nav-link font-body text-[13px] pb-1">Results</a>
+    <a data-nav-link href="about.html" class="nav-link font-body text-[13px] pb-1">About</a>
+    <a data-nav-link href="faq.html" class="nav-link font-body text-[13px] pb-1">FAQ</a>
+    <a href="audit.html" class="interactive-zone btn-outline text-on-surface px-5 py-2.5 font-body text-[13px]">Apply for a Revenue Audit</a>
   </div>
   <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
 </nav>
 
-<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
-<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
-  <div class="flex justify-between items-center mb-16"><span class="font-display text-lg uppercase">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
-  <div class="flex flex-col gap-8">
-    <a href="index.html" class="font-display text-2xl">Home</a>
-    <a href="method.html" class="font-display text-2xl">Method</a>
-    <a href="results.html" class="font-display text-2xl">Results</a>
-    <a href="about.html" class="font-display text-2xl">About</a>
-    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
-    <a href="faq.html" class="font-display text-2xl">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
-  </div>
+<div id="mobile-drawer" class="fixed inset-0 bg-ink-black z-50 md:hidden flex flex-col p-8">
+  <div class="flex justify-between items-center mb-20"><span class="font-display text-lg">Grov Media</span><button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button></div>
+  <nav class="flex flex-col gap-2">
+    <a href="index.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Home</a>
+    <a href="method.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30 text-tertiary">Method</a>
+    <a href="results.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Results</a>
+    <a href="about.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">About</a>
+    <a href="audit.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Revenue Audit</a>
+    <a href="faq.html" class="mobile-link font-display text-3xl py-3">FAQ</a>
+  </nav>
+  <a href="audit.html" class="mobile-link btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-[13px] text-center mt-auto">Apply for a Revenue Audit</a>
 </div>
 
 <main class="pt-20">
   <!-- Page hero -->
-  <section class="py-32 px-6 md:px-margin-safe relative overflow-hidden">
+  <section class="pad-tight px-6 md:px-margin-safe relative overflow-hidden">
     <div class="bg-grain"></div>
-    <div class="radial-glow"></div>
-    <div class="relative z-10 max-w-4xl reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">The Methodology</p>
-      <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">The full path. <span class="italic text-tertiary">End to end.</span></h1>
-      <p class="font-body text-body-lg text-on-surface-variant max-w-2xl">Most agencies own one stage. Grov Media owns the entire path — from first attention to long-term retention.</p>
+    <div class="relative z-10 max-w-3xl reveal">
+      <p class="eyebrow on-gold mb-4">The Methodology</p>
+      <h1 class="font-display title-major text-[40px] md:text-[58px] leading-[1.05] text-on-surface mb-8 text-balance">The full path. <span class="italic">End to end.</span></h1>
+      <p class="font-body text-lg text-on-surface-variant max-w-xl leading-relaxed">Most agencies own one stage. Grov Media owns the entire path — from first attention to long-term retention.</p>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <!-- Stage nav (sticky sidebar desktop) -->
-  <section class="px-6 md:px-margin-safe py-section-gap">
+  <!-- Five stages, connected by a scroll-linked vertical spine -->
+  <section class="px-6 md:px-margin-safe pad-normal" id="method-spine-wrapper">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-      <div class="md:col-span-3 hidden md:block">
-        <div class="sticky top-32 flex flex-col gap-1" id="stage-nav">
-          <a href="#stage-01" class="stage-link py-2 font-body text-label-caps uppercase text-on-surface-variant">01 — Acquisition</a>
-          <a href="#stage-02" class="stage-link py-2 font-body text-label-caps uppercase text-on-surface-variant">02 — Conversion</a>
-          <a href="#stage-03" class="stage-link py-2 font-body text-label-caps uppercase text-on-surface-variant">03 — Lead Handling</a>
-          <a href="#stage-04" class="stage-link py-2 font-body text-label-caps uppercase text-on-surface-variant">04 — Sales Conversion</a>
-          <a href="#stage-05" class="stage-link py-2 font-body text-label-caps uppercase text-on-surface-variant">05 — Retention</a>
+
+      <!-- Scroll-linked spine (desktop only — decorative on mobile) -->
+      <div class="hidden md:block md:col-span-1">
+        <div class="sticky top-32 h-[60vh] flex justify-center method-spine-track" aria-hidden="true">
+          <div class="method-spine-fill" id="method-spine-fill"></div>
         </div>
       </div>
 
-      <div class="md:col-span-9 flex flex-col gap-32">
+      <div class="md:col-span-11 flex flex-col">
         <!-- Stage 01 -->
-        <article id="stage-01" class="scroll-mt-32 reveal">
-          <div class="flex items-baseline gap-6 mb-6">
-            <span class="font-display text-6xl text-tertiary/30">01</span>
-            <h2 class="font-display text-headline-lg text-on-surface">Acquisition</h2>
-          </div>
-          <p class="font-body text-label-caps uppercase text-tertiary mb-4">Goal: More qualified leads entering the pipeline.</p>
-          <p class="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl">We build the infrastructure that attracts the right people — through funnel strategy, lead magnets, quiz funnels, and content systems. Not random traffic. Qualified attention from the right audience.</p>
-          <div class="flex flex-wrap gap-3 mb-10">
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Funnel Strategy</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Lead Magnets</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Quiz Funnels</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Content Architecture</span>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-8 inline-block dashboard-stats">
-            <div class="font-display text-5xl text-tertiary count-up" data-target="3" data-suffix="x">0x</div>
-            <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">More qualified leads, average improvement</p>
+        <article id="stage-01" class="scroll-mt-32 reveal pb-20 border-b border-outline-variant/30">
+          <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+              <span class="font-display text-3xl text-tertiary/50">01</span>
+            </div>
+            <div class="md:col-span-9">
+              <h2 class="font-display title-minor text-[28px] text-on-surface mb-2">Acquisition</h2>
+              <p class="eyebrow on-gold mb-5">Goal — more qualified leads entering the pipeline</p>
+              <p class="font-body text-[15px] leading-relaxed text-on-surface-variant max-w-2xl mb-6">We build the infrastructure that attracts the right people — funnel strategy, lead magnets, quiz funnels, and content systems. Not random traffic. Qualified attention from the right audience.</p>
+              <p class="font-body text-[13px] text-on-surface-variant/70 mb-6">Funnel strategy · Lead magnets · Quiz funnels · Content architecture</p>
+              <p class="font-body text-[15px] text-on-surface">Average improvement: <span class="font-display text-2xl text-tertiary">3x</span> more qualified leads.</p>
+            </div>
           </div>
         </article>
-        <div class="gold-rule"></div>
 
         <!-- Stage 02 -->
-        <article id="stage-02" class="scroll-mt-32 reveal">
-          <div class="flex items-baseline gap-6 mb-6">
-            <span class="font-display text-6xl text-tertiary/30">02</span>
-            <h2 class="font-display text-headline-lg text-on-surface">Conversion</h2>
-          </div>
-          <p class="font-body text-label-caps uppercase text-tertiary mb-4">Goal: More of the right leads booking calls.</p>
-          <p class="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl">We improve the booking flow, landing pages, CTA optimisation, and nurture sequences so interested leads convert — instead of going quiet after their first interaction.</p>
-          <div class="flex flex-wrap gap-3 mb-10">
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Landing Pages</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Booking Flow</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Nurture Sequences</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">CTA Optimisation</span>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-8 inline-block dashboard-stats">
-            <div class="font-display text-5xl text-tertiary count-up" data-target="54" data-suffix="%">0%</div>
-            <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Average lead-to-call rate after system build</p>
+        <article id="stage-02" class="scroll-mt-32 reveal pb-20 pt-16 border-b border-outline-variant/30">
+          <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+              <span class="font-display text-3xl text-tertiary/50">02</span>
+            </div>
+            <div class="md:col-span-9">
+              <h2 class="font-display title-minor text-[28px] text-on-surface mb-2">Conversion</h2>
+              <p class="eyebrow on-gold mb-5">Goal — more of the right leads booking calls</p>
+              <p class="font-body text-[15px] leading-relaxed text-on-surface-variant max-w-2xl mb-6">We improve the booking flow, landing pages, and nurture sequences so interested leads convert — instead of going quiet after their first interaction.</p>
+              <p class="font-body text-[13px] text-on-surface-variant/70 mb-6">Landing pages · Booking flow · Nurture sequences · CTA optimisation</p>
+              <p class="font-body text-[15px] text-on-surface">Average lead-to-call rate after system build: <span class="font-display text-2xl text-tertiary">54%</span>.</p>
+            </div>
           </div>
         </article>
-        <div class="gold-rule"></div>
 
         <!-- Stage 03 -->
-        <article id="stage-03" class="scroll-mt-32 reveal">
-          <div class="flex items-baseline gap-6 mb-6">
-            <span class="font-display text-6xl text-tertiary/30">03</span>
-            <h2 class="font-display text-headline-lg text-on-surface">Lead Handling</h2>
-          </div>
-          <p class="font-body text-label-caps uppercase text-tertiary mb-4">Goal: Zero leads falling through the cracks.</p>
-          <p class="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl">AI conversation systems and GHL automations that handle qualification, warm-up, and follow-up without the founder being the bottleneck. Every lead handled — fast, consistently, at scale.</p>
-          <div class="flex flex-wrap gap-3 mb-10">
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">AI Conversations</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">GHL Automations</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">DM Systems</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">CRM Pipeline</span>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-8 inline-block dashboard-stats">
-            <div class="font-display text-5xl text-tertiary count-up" data-target="15" data-suffix="hrs">0hrs</div>
-            <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Per week returned from manual lead handling</p>
+        <article id="stage-03" class="scroll-mt-32 reveal pb-20 pt-16 border-b border-outline-variant/30">
+          <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+              <span class="font-display text-3xl text-tertiary/50">03</span>
+            </div>
+            <div class="md:col-span-9">
+              <h2 class="font-display title-minor text-[28px] text-on-surface mb-2">Lead Handling</h2>
+              <p class="eyebrow on-gold mb-5">Goal — zero leads falling through the cracks</p>
+              <p class="font-body text-[15px] leading-relaxed text-on-surface-variant max-w-2xl mb-6">AI conversation systems and GHL automations that handle qualification, warm-up, and follow-up without the founder being the bottleneck.</p>
+              <p class="font-body text-[13px] text-on-surface-variant/70 mb-6">AI conversations · GHL automations · DM systems · CRM pipeline</p>
+              <p class="font-body text-[15px] text-on-surface">Time returned per week: <span class="font-display text-2xl text-tertiary">~15hrs</span> from manual lead handling.</p>
+            </div>
           </div>
         </article>
-        <div class="gold-rule"></div>
 
         <!-- Stage 04 -->
-        <article id="stage-04" class="scroll-mt-32 reveal">
-          <div class="flex items-baseline gap-6 mb-6">
-            <span class="font-display text-6xl text-tertiary/30">04</span>
-            <h2 class="font-display text-headline-lg text-on-surface">Sales Conversion</h2>
-          </div>
-          <p class="font-body text-label-caps uppercase text-tertiary mb-4">Goal: More calls closing into paying clients.</p>
-          <p class="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl">Pre-call nurture, trust-building sequences, objection handling assets, and follow-up systems so prospects arrive on calls informed, pre-qualified, and ready — not cold.</p>
-          <div class="flex flex-wrap gap-3 mb-10">
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Pre-Call Nurture</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Sales Copy</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Objection Handling</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Post-Call Follow-Up</span>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-8 inline-block dashboard-stats">
-            <div class="font-display text-5xl text-tertiary count-up" data-target="61" data-suffix="%">0%</div>
-            <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Average call-to-client rate after optimisation</p>
+        <article id="stage-04" class="scroll-mt-32 reveal pb-20 pt-16 border-b border-outline-variant/30">
+          <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+              <span class="font-display text-3xl text-tertiary/50">04</span>
+            </div>
+            <div class="md:col-span-9">
+              <h2 class="font-display title-minor text-[28px] text-on-surface mb-2">Sales Conversion</h2>
+              <p class="eyebrow on-gold mb-5">Goal — more calls closing into paying clients</p>
+              <p class="font-body text-[15px] leading-relaxed text-on-surface-variant max-w-2xl mb-6">Pre-call nurture, trust-building sequences, and follow-up systems so prospects arrive on calls informed, pre-qualified, and ready — not cold.</p>
+              <p class="font-body text-[13px] text-on-surface-variant/70 mb-6">Pre-call nurture · Sales copy · Objection handling · Post-call follow-up</p>
+              <p class="font-body text-[15px] text-on-surface">Average call-to-client rate after optimisation: <span class="font-display text-2xl text-tertiary">61%</span>.</p>
+            </div>
           </div>
         </article>
-        <div class="gold-rule"></div>
 
         <!-- Stage 05 -->
-        <article id="stage-05" class="scroll-mt-32 reveal">
-          <div class="flex items-baseline gap-6 mb-6">
-            <span class="font-display text-6xl text-tertiary/30">05</span>
-            <h2 class="font-display text-headline-lg text-on-surface">Retention</h2>
-          </div>
-          <p class="font-body text-label-caps uppercase text-tertiary mb-4">Goal: More stable, recurring revenue from existing clients.</p>
-          <p class="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl">Onboarding systems, retention sequences, referral programs, and upsell flows that increase lifetime value — so growth doesn't require constantly acquiring new clients from scratch.</p>
-          <div class="flex flex-wrap gap-3 mb-10">
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Onboarding Flows</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Referral Systems</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">Retention Sequences</span>
-            <span class="border border-outline-variant/50 px-4 py-2 font-body text-[11px] uppercase text-on-surface-variant rounded-full">LTV Optimisation</span>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-8 inline-block dashboard-stats">
-            <div class="font-display text-5xl text-tertiary count-up" data-target="2" data-suffix="x">0x</div>
-            <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Average LTV improvement within 90 days</p>
+        <article id="stage-05" class="scroll-mt-32 reveal pt-16">
+          <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+              <span class="font-display text-3xl text-tertiary/50">05</span>
+            </div>
+            <div class="md:col-span-9">
+              <h2 class="font-display title-minor text-[28px] text-on-surface mb-2">Retention</h2>
+              <p class="eyebrow on-gold mb-5">Goal — stable, recurring revenue from existing clients</p>
+              <p class="font-body text-[15px] leading-relaxed text-on-surface-variant max-w-2xl mb-6">Onboarding systems, retention sequences, referral programs, and upsell flows — so growth doesn't require constantly acquiring new clients from scratch.</p>
+              <p class="font-body text-[13px] text-on-surface-variant/70 mb-6">Onboarding flows · Referral systems · Retention sequences · LTV optimisation</p>
+              <p class="font-body text-[15px] text-on-surface">Average LTV improvement within 90 days: <span class="font-display text-2xl text-tertiary">2x</span>.</p>
+            </div>
           </div>
         </article>
       </div>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <section class="py-section-gap px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="font-display text-display-lg-mobile md:text-display-lg mb-8">See where your system leaks.</h2>
-      <p class="font-body text-body-lg opacity-80 mb-12">The Revenue Audit maps this exact path against your business.</p>
-      <a href="audit.html" class="inline-block bg-ink-black text-warm-ivory px-12 py-5 font-body text-label-caps uppercase hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Learn about the Revenue Audit</a>
+  <section class="pad-loose px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display title-major text-[38px] md:text-[56px] leading-[1.08] mb-8">See where your system leaks.</h2>
+      <p class="font-body text-lg opacity-70 mb-10">The Revenue Audit maps this exact path against your business.</p>
+      <a href="audit.html" class="inline-block bg-ink-black text-warm-ivory px-10 py-4 font-body text-[13px] hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Learn about the Revenue Audit</a>
     </div>
   </section>
 </main>
 
-<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
-  <div class="md:col-span-4 flex flex-col justify-between">
-    <div>
-      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
-      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
-      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+<footer class="w-full pt-20 pb-10 bg-ink-black border-t border-outline-variant/30 px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+    <div class="md:col-span-4">
+      <span class="font-display text-lg text-on-surface">Grov Media</span>
+      <p class="font-body text-[14px] mt-4 max-w-xs leading-relaxed">We help service businesses generate more predictable clients.</p>
     </div>
-    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+    <div class="md:col-span-4">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Find Us</p>
+      <p class="font-body text-[13px] mb-4 leading-relaxed">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad, Gujarat 382330</p>
+      <p class="font-body text-[13px] leading-relaxed">5 Penn Plaza, 14th Floor<br>New York, NY 10001</p>
+    </div>
+    <div class="md:col-span-4 md:text-right">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Navigate</p>
+      <div class="flex flex-col gap-2 font-body text-[13px]">
+        <a href="method.html" class="hover:text-tertiary transition-colors">Method</a>
+        <a href="results.html" class="hover:text-tertiary transition-colors">Results</a>
+        <a href="about.html" class="hover:text-tertiary transition-colors">About</a>
+        <a href="faq.html" class="hover:text-tertiary transition-colors">FAQ</a>
+        <a href="tel:+918733948884" class="hover:text-tertiary transition-colors">+91 8733948884</a>
+      </div>
+    </div>
   </div>
-  <div class="md:col-span-4">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p><p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p></div>
-    <div class="mb-6"><p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p><p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p></div>
-    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
-  </div>
-  <div class="md:col-span-4 flex flex-col md:items-end">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
-    <div class="flex flex-col gap-3 md:text-right">
-      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
-      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
-      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
-      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
-      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
-      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
-      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 border-t border-outline-variant/20">
+    <p class="font-body text-[12px] text-on-surface-variant/50">© 2026 GrovMedia.com — All Rights Reserved.</p>
+    <div class="flex gap-6 font-body text-[12px] text-on-surface-variant/50">
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Cookie Policy</a>
     </div>
   </div>
 </footer>
 
 <script src="main.js"></script>
-<script>
-  // Highlight active stage in sticky sidebar
-  const stageLinks = document.querySelectorAll('.stage-link');
-  const stages = document.querySelectorAll('article[id^="stage-"]');
-  if (stageLinks.length && stages.length) {
-    const stageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          stageLinks.forEach(l => l.classList.remove('active-stage'));
-          const link = document.querySelector(`.stage-link[href="#${entry.target.id}"]`);
-          if (link) link.classList.add('active-stage');
-        }
-      });
-    }, { rootMargin: "-40% 0px -50% 0px" });
-    stages.forEach(s => stageObserver.observe(s));
-  }
-</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grov Media | Predictable Client Acquisition for Service Businesses</title>
-<meta name="description" content="Grov Media builds acquisition, conversion, lead-handling and retention systems for service businesses — so revenue becomes predictable and growth stops depending on the founder.">
+<title>Grov Media | Predictable Client Acquisition</title>
+<meta name="description" content="Grov Media builds acquisition, conversion, and lead-handling systems for service businesses — so revenue stops depending on the founder.">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
@@ -12,20 +12,9 @@
 tailwind.config = {
   darkMode: "class",
   theme: { extend: {
-    colors: { "ink-black":"#09090F","surface":"#131314","surface-container":"#1f2020","surface-container-low":"#1b1c1c","surface-container-high":"#2a2a2a","surface-container-highest":"#343535","on-surface":"#e4e2e2","on-surface-variant":"#c4c7c7","outline":"#8e9192","outline-variant":"#444748","tertiary":"#e0c382","on-tertiary":"#3e2e00","warm-ivory":"#FAF8F3","deep-navy":"#0B1628" },
-    borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"0.75rem", full:"9999px" },
-    spacing: { "margin-mobile":"24px","margin-safe":"64px","section-gap":"160px","gutter":"32px" },
-    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] },
-    fontSize: {
-      "display-lg-mobile":["44px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"700"}],
-      "display-lg":["80px",{lineHeight:"88px",letterSpacing:"-0.02em",fontWeight:"700"}],
-      "headline-lg":["44px",{lineHeight:"52px",fontWeight:"600"}],
-      "headline-md":["30px",{lineHeight:"38px",fontWeight:"600"}],
-      "body-lg":["20px",{lineHeight:"32px",fontWeight:"300"}],
-      "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
-      "label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.1em",fontWeight:"600"}],
-      "stats-number":["58px",{lineHeight:"60px",fontWeight:"700"}]
-    }
+    colors: { "ink-black":"#0b0b0e","surface":"#0b0b0e","surface-container":"#16161a","surface-container-low":"#141417","surface-container-high":"#1e1e22","on-surface":"#ece9e2","on-surface-variant":"#9a9a9f","outline":"#6f6f74","outline-variant":"#3a3a40","tertiary":"#c9a961","warm-ivory":"#FAF8F3" },
+    spacing: { "margin-safe":"64px","gutter":"32px" },
+    fontFamily: { display:["Playfair Display","serif"], body:["Outfit","sans-serif"] }
   }}
 }
 </script>
@@ -38,499 +27,231 @@ tailwind.config = {
 <!-- ============ NAV ============ -->
 <nav id="main-nav" class="fixed top-0 w-full z-50 h-20 flex justify-between items-center px-6 md:px-margin-safe border-b border-transparent">
   <a href="index.html" class="flex items-center gap-3">
-    <span class="font-display text-xl md:text-2xl tracking-tight text-on-surface uppercase">Grov Media</span>
+    <span class="font-display text-lg md:text-xl tracking-tight text-on-surface">Grov Media</span>
   </a>
-  <div class="hidden md:flex gap-8 items-center">
-    <a data-nav-link href="method.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Method</a>
-    <a data-nav-link href="results.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">Results</a>
-    <a data-nav-link href="about.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">About</a>
-    <a data-nav-link href="faq.html" class="font-body text-label-caps text-on-surface-variant hover:text-tertiary transition-colors duration-300 uppercase">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a data-nav-link href="method.html" class="nav-link font-body text-[13px] pb-1">Method</a>
+    <a data-nav-link href="results.html" class="nav-link font-body text-[13px] pb-1">Results</a>
+    <a data-nav-link href="about.html" class="nav-link font-body text-[13px] pb-1">About</a>
+    <a data-nav-link href="faq.html" class="nav-link font-body text-[13px] pb-1">FAQ</a>
+    <a href="audit.html" class="interactive-zone btn-outline text-on-surface px-5 py-2.5 font-body text-[13px]">Apply for a Revenue Audit</a>
   </div>
   <button id="menu-open" aria-expanded="false" aria-controls="mobile-drawer" class="md:hidden text-on-surface material-symbols-outlined" aria-label="Open menu">menu</button>
 </nav>
 
 <!-- ============ MOBILE DRAWER ============ -->
-<div id="mobile-overlay" class="fixed inset-0 bg-ink-black/80 z-40 md:hidden"></div>
-<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-surface z-50 md:hidden flex flex-col p-8 border-l border-outline-variant/30">
-  <div class="flex justify-between items-center mb-16">
-    <span class="font-display text-lg uppercase">Grov Media</span>
+<div id="mobile-drawer" class="fixed inset-0 bg-ink-black z-50 md:hidden flex flex-col p-8">
+  <div class="flex justify-between items-center mb-20">
+    <span class="font-display text-lg">Grov Media</span>
     <button id="menu-close" class="text-on-surface material-symbols-outlined" aria-label="Close menu">close</button>
   </div>
-  <div class="flex flex-col gap-8">
-    <a href="index.html" class="font-display text-2xl">Home</a>
-    <a href="method.html" class="font-display text-2xl">Method</a>
-    <a href="results.html" class="font-display text-2xl">Results</a>
-    <a href="about.html" class="font-display text-2xl">About</a>
-    <a href="audit.html" class="font-display text-2xl">Revenue Audit</a>
-    <a href="faq.html" class="font-display text-2xl">FAQ</a>
-    <a href="contact.html" class="btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-label-caps uppercase text-center mt-4">Apply for a Revenue Audit</a>
-  </div>
+  <nav class="flex flex-col gap-2">
+    <a href="index.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Home</a>
+    <a href="method.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Method</a>
+    <a href="results.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Results</a>
+    <a href="about.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">About</a>
+    <a href="audit.html" class="mobile-link font-display text-3xl py-3 border-b border-outline-variant/30">Revenue Audit</a>
+    <a href="faq.html" class="mobile-link font-display text-3xl py-3">FAQ</a>
+  </nav>
+  <a href="audit.html" class="mobile-link btn-gold bg-tertiary text-ink-black px-6 py-4 font-body text-[13px] text-center mt-auto">Apply for a Revenue Audit</a>
 </div>
 
 <main class="pt-20">
 
   <!-- ============ HERO ============ -->
-  <section class="min-h-[92vh] flex flex-col justify-center px-6 md:px-margin-safe relative overflow-hidden">
+  <section class="min-h-[92vh] flex flex-col justify-center px-6 md:px-margin-safe relative overflow-hidden pad-tight">
     <div class="bg-grain"></div>
-    <div class="radial-glow"></div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 pt-16 pb-8">
-      <div class="reveal">
-        <p class="font-body text-label-caps text-tertiary uppercase mb-6">Predictable Client Acquisition</p>
-        <h1 class="font-display text-display-lg-mobile md:text-display-lg text-on-surface mb-8 text-balance">We help service businesses generate more <span class="italic text-tertiary">predictable clients.</span></h1>
-        <p class="font-body text-body-lg text-on-surface-variant max-w-xl mb-10">Grov Media improves acquisition, conversion, and lead-handling systems for service businesses — so revenue becomes predictable and growth stops depending entirely on founder effort.</p>
-        <div class="flex flex-wrap gap-4 mb-14">
-          <a href="contact.html" class="interactive-zone btn-gold bg-tertiary text-ink-black px-8 py-4 font-body text-label-caps uppercase hover:opacity-90">Apply for a Revenue Audit</a>
-          <a href="method.html" class="interactive-zone btn-outline border border-outline-variant text-on-surface px-8 py-4 font-body text-label-caps uppercase">See the Methodology</a>
-        </div>
-
-        <!-- Pipeline (desktop) -->
-        <div class="hidden md:flex items-center w-full max-w-2xl" aria-hidden="true">
-          <div class="flex flex-col items-center gap-2"><div class="flow-node active-node" id="node-1">01</div><span class="font-body text-[10px] text-tertiary uppercase">Attention</span></div>
-          <div class="flex-1 flow-line mx-3"><div class="flow-particle" style="animation-delay:0s;"></div></div>
-          <div class="flex flex-col items-center gap-2"><div class="flow-node" id="node-2">02</div><span class="font-body text-[10px] text-tertiary uppercase">Inquiry</span></div>
-          <div class="flex-1 flow-line mx-3"><div class="flow-particle" style="animation-delay:1s;"></div></div>
-          <div class="flex flex-col items-center gap-2"><div class="flow-node" id="node-3">03</div><span class="font-body text-[10px] text-tertiary uppercase">Call</span></div>
-          <div class="flex-1 flow-line mx-3"><div class="flow-particle" style="animation-delay:2s;"></div></div>
-          <div class="flex flex-col items-center gap-2"><div class="flow-node" id="node-4">04</div><span class="font-body text-[10px] text-tertiary uppercase">Client</span></div>
-          <div class="flex-1 flow-line mx-3"><div class="flow-particle" style="animation-delay:3s;"></div></div>
-          <div class="flex flex-col items-center gap-2"><div class="flow-node" id="node-5">05</div><span class="font-body text-[10px] text-tertiary uppercase">Retention</span></div>
-        </div>
-        <!-- Pipeline (mobile) -->
-        <div class="flex md:hidden flex-col items-start gap-3 ml-2" aria-hidden="true">
-          <div class="flex items-center gap-4"><div class="flow-node active-node">01</div><span class="font-body text-[10px] text-tertiary uppercase">Attention → Inquiry → Call → Client → Retention</span></div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+      <div class="lg:col-span-7 reveal">
+        <p class="eyebrow on-gold mb-6">Predictable Client Acquisition</p>
+        <h1 class="font-display title-major text-[42px] leading-[1.05] md:text-[68px] md:leading-[1.04] text-on-surface mb-8 text-balance">We help service businesses generate more <span class="italic">predictable</span> clients.</h1>
+        <p class="font-body text-lg leading-relaxed text-on-surface-variant max-w-lg mb-10">Acquisition, conversion, and lead-handling systems — built so revenue stops depending on the founder chasing every lead.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="audit.html" class="interactive-zone btn-gold bg-tertiary text-ink-black px-7 py-3.5 font-body text-[13px]">Apply for a Revenue Audit</a>
+          <a href="method.html" class="interactive-zone btn-text font-body text-[13px] text-on-surface-variant px-2 py-3.5">See how it works →</a>
         </div>
       </div>
-      <div class="reveal delay-200 group">
-        <div class="aspect-[4/3] img-frame img-placeholder rounded-lg">
-          <span class="img-label">Grov Media / System Overview</span>
+
+      <!-- Signature spine — real system, not decoration -->
+      <div class="lg:col-span-5 reveal delay-200">
+        <div class="flex flex-col gap-0" data-spine aria-hidden="true">
+          <div class="flex items-center gap-0">
+            <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Attention</span></div>
+            <div class="spine-line mx-2 mb-6"><div class="spine-fill"></div></div>
+            <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Inquiry</span></div>
+            <div class="spine-line mx-2 mb-6"><div class="spine-fill"></div></div>
+            <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Call</span></div>
+            <div class="spine-line mx-2 mb-6"><div class="spine-fill"></div></div>
+            <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Client</span></div>
+            <div class="spine-line mx-2 mb-6"><div class="spine-fill"></div></div>
+            <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Retention</span></div>
+          </div>
         </div>
-        <p class="font-body text-[11px] text-on-surface-variant uppercase tracking-widest mt-4">Serving service businesses across six continents</p>
+        <p class="font-body text-[12px] text-on-surface-variant/60 mt-6 max-w-xs">The full path — not just the parts everyone else optimizes.</p>
       </div>
     </div>
   </section>
-
-  <!-- Segment marquee -->
   <div class="thin-rule"></div>
-  <div class="py-8 overflow-hidden">
-    <div class="marquee-track font-display italic text-2xl md:text-3xl text-on-surface-variant/60 gap-12 whitespace-nowrap">
-      <span class="px-6">Coaches</span><span class="px-6">Consultants</span><span class="px-6">Practitioners</span><span class="px-6">Educators</span><span class="px-6">Trainers</span><span class="px-6">Service Businesses</span><span class="px-6">Transformation Experts</span><span class="px-6">Personal Brands</span>
-      <span class="px-6">Coaches</span><span class="px-6">Consultants</span><span class="px-6">Practitioners</span><span class="px-6">Educators</span><span class="px-6">Trainers</span><span class="px-6">Service Businesses</span><span class="px-6">Transformation Experts</span><span class="px-6">Personal Brands</span>
-    </div>
-  </div>
-  <div class="gold-rule"></div>
 
-  <!-- ============ THE PROBLEM ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe" id="problem">
+  <!-- ============ THE PROBLEM (3 only) ============ -->
+  <section class="pad-normal px-6 md:px-margin-safe">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
       <div class="md:col-span-4 reveal">
-        <p class="font-body text-label-caps text-tertiary uppercase mb-4">The Problem</p>
-        <h2 class="font-display text-headline-lg text-on-surface md:sticky md:top-32">Most service businesses don't have <span class="italic text-tertiary">predictable client acquisition.</span></h2>
-        <p class="font-body text-body-md text-on-surface-variant mt-6">They either don't generate enough qualified leads — or fail to convert existing attention into clients consistently. Most agencies address one part of this. The problem stays because no one owns the full path.</p>
+        <p class="eyebrow mb-4">The Problem</p>
+        <h2 class="font-display title-minor text-[30px] leading-tight text-on-surface">Most service businesses don't have <span class="italic text-tertiary">predictable</span> acquisition.</h2>
       </div>
-      <div class="md:col-span-8 grid gap-0 mt-12 md:mt-0">
-        <div class="grid md:grid-cols-2 gap-8">
-          <div>
-            <p class="font-body text-label-caps text-on-surface-variant uppercase mb-6">Instead of</p>
-            <ul class="space-y-6">
-              <li class="border-b border-outline-variant/20 pb-5 reveal font-body text-body-md text-on-surface-variant">Inconsistent lead flow with no system behind it</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-100 font-body text-body-md text-on-surface-variant">Leads going cold because follow-up is manual</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-200 font-body text-body-md text-on-surface-variant">Revenue that depends on constant founder presence</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-300 font-body text-body-md text-on-surface-variant">Sales calls with unqualified, unprepared prospects</li>
-              <li class="pb-5 reveal delay-400 font-body text-body-md text-on-surface-variant">Growth that feels random and impossible to predict</li>
-            </ul>
+      <div class="md:col-span-7 md:col-start-6">
+        <div class="flex flex-col">
+          <div class="reveal py-8 border-t border-outline-variant/40 grid grid-cols-[auto_1fr] gap-8 items-baseline">
+            <span class="font-display text-2xl text-on-surface-variant/40">01</span>
+            <p class="font-body text-lg text-on-surface leading-snug">Lead flow is inconsistent — with no system behind it.</p>
           </div>
-          <div>
-            <p class="font-body text-label-caps text-tertiary uppercase mb-6">We build</p>
-            <ul class="space-y-6">
-              <li class="border-b border-outline-variant/20 pb-5 reveal font-body text-body-md text-on-surface">A qualified lead pipeline that runs without you chasing</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-100 font-body text-body-md text-on-surface">AI systems that follow up every lead, automatically</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-200 font-body text-body-md text-on-surface">Pre-qualified, pre-educated prospects who arrive ready</li>
-              <li class="border-b border-outline-variant/20 pb-5 reveal delay-300 font-body text-body-md text-on-surface">A measurable, repeatable path from attention to client</li>
-              <li class="pb-5 reveal delay-400 font-body text-body-md text-on-surface">One system that owns the full path — end to end</li>
-            </ul>
+          <div class="reveal delay-100 py-8 border-t border-outline-variant/40 grid grid-cols-[auto_1fr] gap-8 items-baseline">
+            <span class="font-display text-2xl text-on-surface-variant/40">02</span>
+            <p class="font-body text-lg text-on-surface leading-snug">Leads go cold because follow-up is manual, and manual doesn't scale.</p>
+          </div>
+          <div class="reveal delay-200 py-8 border-t border-b border-outline-variant/40 grid grid-cols-[auto_1fr] gap-8 items-baseline">
+            <span class="font-display text-2xl text-on-surface-variant/40">03</span>
+            <p class="font-body text-lg text-on-surface leading-snug">Revenue depends entirely on the founder staying constantly present.</p>
           </div>
         </div>
-        <blockquote class="mt-14 reveal">
-          <p class="font-display italic text-2xl md:text-3xl text-on-surface leading-snug">"I know my offer works. I just want more consistency."</p>
-          <p class="font-body text-body-md text-on-surface-variant mt-4">That's the gap Grov Media exists to close.</p>
-        </blockquote>
+        <p class="font-body text-[13px] text-on-surface-variant/70 mt-8">Most agencies address one part of this. The gap stays because no one owns the full path. <a href="method.html" class="btn-text text-tertiary">See the full methodology →</a></p>
       </div>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <!-- ============ REVENUE LEAKS (diagnostic preview) ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-ink-black relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-tertiary via-ink-black to-ink-black"></div>
-    <div class="text-center mb-20 max-w-3xl mx-auto relative z-10 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Diagnostic</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Where money leaks. <span class="italic text-tertiary">Before we fix it.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">The Revenue Audit identifies which of these is costing the most — and what to fix first.</p>
+  <!-- ============ APPROACH (4 principles, quiet list not cards) ============ -->
+  <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low">
+    <div class="max-w-2xl mb-16 reveal">
+      <p class="eyebrow on-gold mb-4">The Grov Approach</p>
+      <h2 class="font-display title-minor text-[30px] text-on-surface leading-tight">Systems that understand how people decide — not just automation logic.</h2>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 max-w-6xl mx-auto">
-      <div class="diagnostic-card relative p-8 rounded-lg reveal bg-surface interactive-zone group">
-        <div class="diagnostic-line"></div>
-        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">01</div>
-        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Lead Response Time</div>
-        <p class="font-body text-body-md text-on-surface-variant">Every hour a lead waits drops conversion probability by 10x.</p>
-      </div>
-      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-100 bg-surface interactive-zone group">
-        <div class="diagnostic-line"></div>
-        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">02</div>
-        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Lead-to-Call Rate</div>
-        <p class="font-body text-body-md text-on-surface-variant">Below 30% signals a structural breakdown between interest and action.</p>
-      </div>
-      <div class="diagnostic-card relative p-8 rounded-lg reveal delay-200 bg-surface interactive-zone group">
-        <div class="diagnostic-line"></div>
-        <div class="font-display text-stats-number text-on-surface-variant diagnostic-num mb-4 opacity-50 group-hover:opacity-100">03</div>
-        <div class="font-body text-label-caps uppercase text-on-surface mb-4 tracking-widest">Call-to-Client Rate</div>
-        <p class="font-body text-body-md text-on-surface-variant">Low close rates usually mean leads arrive unprepared, not that the pitch is broken.</p>
-      </div>
-    </div>
-    <div class="text-center mt-12 relative z-10 reveal">
-      <a href="audit.html" class="font-body text-label-caps uppercase text-tertiary hover:underline underline-offset-4">See all six diagnostics on the Revenue Audit page →</a>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-4xl">
+      <div class="reveal"><p class="font-display text-xl text-on-surface mb-2">Buyer psychology mapping</p><p class="font-body text-[15px] text-on-surface-variant leading-relaxed">How your ideal client actually decides — what builds trust, what stalls them.</p></div>
+      <div class="reveal delay-100"><p class="font-display text-xl text-on-surface mb-2">Messaging built on real language</p><p class="font-body text-[15px] text-on-surface-variant leading-relaxed">Copy from how clients actually describe their problem — not guesswork.</p></div>
+      <div class="reveal delay-200"><p class="font-display text-xl text-on-surface mb-2">Conversion at every touchpoint</p><p class="font-body text-[15px] text-on-surface-variant leading-relaxed">Every email, page, and sequence moves someone one step closer to deciding.</p></div>
+      <div class="reveal delay-300"><p class="font-display text-xl text-on-surface mb-2">Automation that feels human</p><p class="font-body text-[15px] text-on-surface-variant leading-relaxed">AI conversations that read like someone who understands the client's world.</p></div>
     </div>
   </section>
-  <div class="gold-rule"></div>
+  <div class="thin-rule"></div>
 
-  <!-- ============ METHODOLOGY SUMMARY ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe" id="method-preview">
-    <div class="max-w-3xl mb-20 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">The Methodology</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">The full path. <span class="italic text-tertiary">End to end.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">Most agencies own one stage. Grov Media owns the entire path — from first attention to long-term retention.</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
-      <div class="reveal border-t border-tertiary pt-4"><span class="font-display text-3xl text-tertiary">01</span><p class="font-body text-label-caps uppercase text-on-surface mt-2">Acquisition</p></div>
-      <div class="reveal delay-100 border-t border-outline-variant pt-4"><span class="font-display text-3xl text-on-surface-variant">02</span><p class="font-body text-label-caps uppercase text-on-surface mt-2">Conversion</p></div>
-      <div class="reveal delay-200 border-t border-outline-variant pt-4"><span class="font-display text-3xl text-on-surface-variant">03</span><p class="font-body text-label-caps uppercase text-on-surface mt-2">Lead Handling</p></div>
-      <div class="reveal delay-300 border-t border-outline-variant pt-4"><span class="font-display text-3xl text-on-surface-variant">04</span><p class="font-body text-label-caps uppercase text-on-surface mt-2">Sales Conversion</p></div>
-      <div class="reveal delay-400 border-t border-outline-variant pt-4"><span class="font-display text-3xl text-on-surface-variant">05</span><p class="font-body text-label-caps uppercase text-on-surface mt-2">Retention</p></div>
-    </div>
-    <div class="text-center reveal">
-      <a href="method.html" class="interactive-zone btn-outline inline-block border border-outline-variant text-on-surface px-8 py-4 font-body text-label-caps uppercase">Explore the full methodology</a>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ RESULTS / DATA ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low" id="results">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center mb-24">
+  <!-- ============ CREDIBILITY (verified metric, restrained) ============ -->
+  <section class="pad-tight px-6 md:px-margin-safe">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
       <div class="md:col-span-5 reveal">
-        <p class="font-body text-label-caps text-tertiary uppercase mb-4">The Data</p>
-        <h2 class="font-display text-headline-lg text-on-surface mb-6">Predictability compounds.</h2>
-        <p class="font-body text-body-lg text-on-surface-variant mb-8">Average improvements across retainer clients, measured at 90 days post-launch.</p>
-        <div class="space-y-6 dashboard-stats">
+        <p class="eyebrow mb-4">The Data</p>
+        <p class="font-display text-2xl text-on-surface leading-snug">Client acquisition metrics — before Grov, after Grov.</p>
+      </div>
+      <div class="md:col-span-7 dashboard-stats reveal delay-100">
+        <div class="grid grid-cols-3 gap-8">
           <div>
-            <p class="font-body text-label-caps text-on-surface-variant uppercase mb-2">Before Grov</p>
-            <div class="hz-bar-wrap"><div class="hz-bar !bg-outline-variant" data-width="22%"></div><span class="hz-label">Volatile / founder-dependent</span></div>
+            <p class="text-on-surface-variant/50 font-display text-lg line-through decoration-1">2/mo</p>
+            <p class="text-tertiary font-display text-3xl">9/mo</p>
+            <p class="font-body text-[11px] text-on-surface-variant mt-2">Qualified Leads</p>
           </div>
           <div>
-            <p class="font-body text-label-caps text-tertiary uppercase mb-2">After Grov</p>
-            <div class="hz-bar-wrap"><div class="hz-bar" data-width="85%"></div><span class="hz-label !text-ink-black">Compounding, systemized growth</span></div>
+            <p class="text-on-surface-variant/50 font-display text-lg line-through decoration-1">18%</p>
+            <p class="text-tertiary font-display text-3xl">54%</p>
+            <p class="font-body text-[11px] text-on-surface-variant mt-2">Lead → Call</p>
+          </div>
+          <div>
+            <p class="text-on-surface-variant/50 font-display text-lg line-through decoration-1">22%</p>
+            <p class="text-tertiary font-display text-3xl">61%</p>
+            <p class="font-body text-[11px] text-on-surface-variant mt-2">Call → Client</p>
           </div>
         </div>
       </div>
-      <div class="md:col-span-7 reveal delay-200">
-        <div class="aspect-video bg-surface rounded-xl border border-outline-variant/20 p-8 relative flex flex-col justify-end graph-trigger" id="graph-container">
-          <span class="absolute top-8 left-8 font-body text-[10px] text-on-surface-variant uppercase tracking-widest">Illustrative system trajectory</span>
-          <svg class="w-full h-full overflow-visible" viewBox="0 0 500 300">
-            <line stroke="currentColor" class="text-outline-variant/30" stroke-width="1" x1="0" x2="500" y1="300" y2="300"/>
-            <line stroke="currentColor" class="text-outline-variant/30" stroke-width="1" x1="0" x2="500" y1="200" y2="200"/>
-            <line stroke="currentColor" class="text-outline-variant/30" stroke-width="1" x1="0" x2="500" y1="100" y2="100"/>
-            <path d="M0,280 Q50,260 100,285 T200,270" fill="none" stroke="currentColor" class="text-outline-variant/50" stroke-width="2"/>
-            <path class="line-graph-path" d="M200,270 C250,250 300,150 400,80 S480,20 500,10" fill="none" stroke="#e0c382" stroke-width="4"/>
-            <circle class="graph-dot" cx="200" cy="270" r="4" fill="#131314" stroke="#e0c382" stroke-width="2"/>
-            <circle class="graph-dot" cx="500" cy="10" r="4" fill="#131314" stroke="#e0c382" stroke-width="2"/>
-            <path class="opacity-30" d="M200,270 C250,250 300,150 400,80 S480,20 500,10 L500,300 L200,300 Z" fill="url(#graph-gradient)"/>
-            <defs><linearGradient id="graph-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#e0c382" stop-opacity="0.5"/><stop offset="100%" stop-color="#e0c382" stop-opacity="0"/></linearGradient></defs>
-          </svg>
+    </div>
+  </section>
+  <div class="thin-rule"></div>
+
+  <!-- ============ RESULTS TEASER (one strong case, editorial) ============ -->
+  <section class="pad-normal px-6 md:px-margin-safe">
+    <div class="flex justify-between items-end mb-12 reveal">
+      <div>
+        <p class="eyebrow mb-4">Proof</p>
+        <h2 class="font-display title-minor text-[30px] text-on-surface">Systems built. <span class="italic text-tertiary">Numbers moved.</span></h2>
+      </div>
+      <a href="results.html" class="btn-text hidden md:inline-block font-body text-[13px] text-on-surface-variant">All case studies →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 group reveal delay-100">
+      <div class="md:col-span-7">
+        <div class="aspect-[16/10] img-frame">
+          <span class="img-caption">Grov Media <span class="divider">/</span> Client Story</span>
         </div>
       </div>
+      <div class="md:col-span-5 flex flex-col justify-center">
+        <p class="eyebrow on-gold mb-3">Quiz Funnel + AI System</p>
+        <p class="font-display text-2xl text-on-surface mb-4">Online Wellness Coach</p>
+        <p class="font-body text-[15px] text-on-surface-variant leading-relaxed mb-6">Engaged audience, no structured path from follower to client — every sale required the founder personally chasing leads.</p>
+        <div class="case-metric font-display text-5xl text-on-surface mb-2">312%</div>
+        <p class="font-body text-[12px] text-on-surface-variant">Increase in qualified enquiries within 60 days</p>
+      </div>
     </div>
+    <a href="results.html" class="btn-text md:hidden inline-block font-body text-[13px] text-on-surface-variant mt-10">All case studies →</a>
+  </section>
+  <div class="thin-rule"></div>
 
-    <!-- Verified before/after strip -->
-    <div class="max-w-6xl mx-auto reveal">
-      <p class="font-body text-label-caps text-on-surface-variant uppercase mb-8 text-center">Client acquisition metrics — before vs after</p>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-6 dashboard-stats">
-        <div class="text-center border-r border-outline-variant/20 last:border-r-0">
-          <p class="text-on-surface-variant/60 font-display text-2xl line-through decoration-1">2/mo</p>
-          <p class="text-tertiary font-display text-3xl count-up" data-target="9" data-suffix="/mo">0/mo</p>
-          <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Qualified Leads</p>
-        </div>
-        <div class="text-center border-r border-outline-variant/20 last:border-r-0">
-          <p class="text-on-surface-variant/60 font-display text-2xl line-through decoration-1">18%</p>
-          <p class="text-tertiary font-display text-3xl count-up" data-target="54" data-suffix="%">0%</p>
-          <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Lead → Call</p>
-        </div>
-        <div class="text-center border-r border-outline-variant/20 last:border-r-0">
-          <p class="text-on-surface-variant/60 font-display text-2xl line-through decoration-1">22%</p>
-          <p class="text-tertiary font-display text-3xl count-up" data-target="61" data-suffix="%">0%</p>
-          <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Call → Client</p>
-        </div>
-        <div class="text-center border-r border-outline-variant/20 last:border-r-0">
-          <p class="text-on-surface-variant/60 font-display text-2xl line-through decoration-1">8hrs</p>
-          <p class="text-tertiary font-display text-3xl">1.5hrs</p>
-          <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Admin / Week</p>
-        </div>
-        <div class="text-center">
-          <p class="text-on-surface-variant/60 font-display text-2xl line-through decoration-1">3d</p>
-          <p class="text-tertiary font-display text-3xl">&lt;2hr</p>
-          <p class="font-body text-[11px] text-on-surface-variant uppercase mt-2">Response Time</p>
+  <!-- ============ FOUNDER TEASER ============ -->
+  <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-5 reveal">
+        <div class="aspect-[3/4] img-frame max-w-sm">
+          <span class="img-caption">Grov Media <span class="divider">/</span> Founders</span>
         </div>
       </div>
-      <p class="text-center mt-8">
-        <a href="results.html" class="font-body text-label-caps uppercase text-tertiary hover:underline underline-offset-4">See the full results dashboard →</a>
-      </p>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ CASE STUDIES ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe" id="cases">
-    <div class="max-w-3xl mb-20 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Work</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Systems built. <span class="italic text-tertiary">Numbers moved.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">Composite client profiles. Results representative of system implementations.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16" id="case-grid"></div>
-    <div class="text-center mt-16 reveal">
-      <a href="results.html" class="interactive-zone btn-outline inline-block border border-outline-variant text-on-surface px-8 py-4 font-body text-label-caps uppercase">View all case studies</a>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ WHO WE SERVE ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low" id="qualify">
-    <div class="max-w-3xl mb-16 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Who We Serve</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Fit matters. <span class="italic text-tertiary">We qualify before we build.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">We don't take every client. We work where we can genuinely move the number — and we'll tell you directly if we can't.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl">
-      <div class="reveal">
-        <p class="font-body text-label-caps uppercase text-tertiary mb-6">✓ Good fit</p>
-        <ul class="space-y-4 font-body text-body-md text-on-surface">
-          <li class="flex gap-3"><span class="text-tertiary">✓</span>Service business already generating revenue — consulting, coaching, practice, training</li>
-          <li class="flex gap-3"><span class="text-tertiary">✓</span>Some existing traction — audience, leads, or clients already in motion</li>
-          <li class="flex gap-3"><span class="text-tertiary">✓</span>Growth is inconsistent — can't predict where next month's clients come from</li>
-          <li class="flex gap-3"><span class="text-tertiary">✓</span>Willing to build infrastructure, not just run short-term campaigns</li>
-          <li class="flex gap-3"><span class="text-tertiary">✓</span>Revenue between $5K–$80K/month and want it more predictable</li>
-        </ul>
-      </div>
-      <div class="reveal delay-200">
-        <p class="font-body text-label-caps uppercase text-on-surface-variant mb-6">✕ Not a fit</p>
-        <ul class="space-y-4 font-body text-body-md text-on-surface-variant">
-          <li class="flex gap-3"><span>✕</span>Pre-revenue — still figuring out the offer or finding the audience</li>
-          <li class="flex gap-3"><span>✕</span>Product-based business or e-commerce</li>
-          <li class="flex gap-3"><span>✕</span>Looking for social media management or content posting only</li>
-          <li class="flex gap-3"><span>✕</span>Not open to building systems — only want quick tactical fixes</li>
-        </ul>
+      <div class="md:col-span-6 md:col-start-7 reveal delay-100">
+        <p class="eyebrow mb-4">Built By Founders</p>
+        <p class="font-display text-2xl md:text-3xl text-on-surface leading-snug mb-6">We started as a social media agency. We watched talented owners create brilliant content — and still not grow. <span class="italic text-tertiary">So we built the answer.</span></p>
+        <a href="about.html" class="btn-text font-body text-[13px] text-on-surface-variant">Meet Mokshita &amp; Jay →</a>
       </div>
     </div>
   </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ WHAT GROV SHIPS ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe">
-    <div class="max-w-3xl mb-16 reveal">
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">What ships when you work with Grov.</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl">
-      <div class="reveal">
-        <p class="font-body text-label-caps uppercase text-on-surface-variant mb-6">We fix</p>
-        <ul class="space-y-3 font-body text-body-md text-on-surface-variant border-l border-outline-variant/30 pl-6">
-          <li>Inconsistent lead quality</li><li>Weak lead-to-call conversion</li><li>Manual follow-up bottlenecks</li><li>Low call-to-client rate</li><li>Content dependency</li><li>Founder as single point of failure</li>
-        </ul>
-      </div>
-      <div class="reveal delay-200">
-        <p class="font-body text-label-caps uppercase text-tertiary mb-6">We ship</p>
-        <ul class="space-y-3 font-body text-body-md text-on-surface border-l border-tertiary/50 pl-6">
-          <li>Revenue leak diagnosis</li><li>Full funnel architecture</li><li>AI conversation systems</li><li>GHL build and automation</li><li>Conversion copywriting</li><li>Monthly optimisation</li>
-        </ul>
-      </div>
-    </div>
-    <blockquote class="max-w-3xl mt-16 reveal">
-      <p class="font-display italic text-2xl text-on-surface leading-snug">"We will look for the leak, name the number worth moving, and tell you whether we can fix it. If there isn't a clear path to revenue movement, we will say no."</p>
-    </blockquote>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ WHY GROV IS DIFFERENT ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low">
-    <div class="max-w-3xl mb-16 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">What Makes Us Different</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">We don't just build systems. <span class="italic text-tertiary">We build systems that understand how people make decisions — and move them.</span></h2>
-      <p class="font-body text-body-lg text-on-surface-variant">Most agencies build the infrastructure. We go further — understanding the psychology behind why buyers act, hesitate, or disappear.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl">
-      <div class="reveal border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Buyer Psychology Mapping</h3><p class="font-body text-body-md text-on-surface-variant">We map exactly how your ideal client makes decisions — what creates trust, what triggers hesitation, what accelerates action.</p></div>
-      <div class="reveal delay-100 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Messaging That Moves People</h3><p class="font-body text-body-md text-on-surface-variant">Copy built on real buyer language — not guesswork. We study what your clients say and what makes them feel safe enough to act.</p></div>
-      <div class="reveal delay-200 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Conversion at Every Touchpoint</h3><p class="font-body text-body-md text-on-surface-variant">Every email, landing page, DM response, and sequence is designed to move someone one step closer to a decision.</p></div>
-      <div class="reveal delay-300 border-t border-outline-variant/30 pt-6"><h3 class="font-display text-xl text-on-surface mb-2">Systems That Feel Human</h3><p class="font-body text-body-md text-on-surface-variant">Automation that doesn't feel automated. AI conversations that read like a real person who understands the client's world.</p></div>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ FOUNDERS ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe" id="founders">
-    <div class="max-w-4xl mx-auto mb-20 text-center reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">The People Behind It</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Built by founders, <span class="italic text-tertiary">for founders.</span></h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 max-w-5xl mx-auto">
-      <div class="group reveal cinematic-reveal" id="founder-1">
-        <div class="aspect-[3/4] img-frame img-placeholder rounded-lg mb-6"><span class="img-label">Grov Media / Mokshita Paswani</span></div>
-        <h3 class="font-display text-headline-md text-on-surface mb-2">Mokshita Paswani</h3>
-        <p class="font-body text-label-caps text-tertiary uppercase tracking-widest mb-4">Strategy · Messaging · Psychology</p>
-        <p class="font-body text-body-md text-on-surface-variant">The strategic and creative mind of Grov Media, turning positioning into clarity, and clarity into conversion.</p>
-      </div>
-      <div class="group reveal delay-200 cinematic-reveal md:mt-32" id="founder-2">
-        <div class="aspect-[3/4] img-frame img-placeholder rounded-lg mb-6"><span class="img-label">Grov Media / Jay Mohnani</span></div>
-        <h3 class="font-display text-headline-md text-on-surface mb-2">Jay Mohnani</h3>
-        <p class="font-body text-label-caps text-tertiary uppercase tracking-widest mb-4">Systems · Automation · Architecture</p>
-        <p class="font-body text-body-md text-on-surface-variant">The builder — GHL builds, AI conversation systems, automation logic, and dashboards that track what actually matters.</p>
-      </div>
-    </div>
-    <div class="text-center mt-16 reveal">
-      <a href="about.html" class="interactive-zone btn-outline inline-block border border-outline-variant text-on-surface px-8 py-4 font-body text-label-caps uppercase">Read the full story</a>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ TESTIMONIALS ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-surface-container-low" id="testi">
-    <div class="max-w-4xl mx-auto mb-20 text-center reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">Client Voices</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">What working with Grov <span class="italic text-tertiary">actually feels like.</span></h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto" id="video-grid"></div>
-    <div class="text-center mt-16 reveal">
-      <a href="results.html#testimonials" class="interactive-zone btn-outline inline-block border border-outline-variant text-on-surface px-8 py-4 font-body text-label-caps uppercase">Read more client voices</a>
-    </div>
-  </section>
-  <div class="gold-rule"></div>
-
-  <!-- ============ FAQ PREVIEW ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe max-w-3xl mx-auto" id="faq-preview">
-    <div class="mb-16 reveal">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-4">FAQ</p>
-      <h2 class="font-display text-headline-lg text-on-surface mb-6">Questions before you <span class="italic text-tertiary">apply.</span></h2>
-    </div>
-    <div id="faq-preview-list" class="reveal"></div>
-    <div class="text-center mt-12 reveal">
-      <a href="faq.html" class="font-body text-label-caps uppercase text-tertiary hover:underline underline-offset-4">See the full FAQ →</a>
-    </div>
-  </section>
+  <div class="thin-rule"></div>
 
   <!-- ============ FINAL CTA ============ -->
-  <section class="py-section-gap px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal" id="audit">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="font-display text-display-lg-mobile md:text-display-lg mb-8">Apply for a Revenue Audit.</h2>
-      <p class="font-body text-body-lg opacity-80 mb-4 max-w-2xl mx-auto">We will find the leak, name the number worth moving, and tell you whether we can fix it. If there is no clear path to revenue movement, we will say no.</p>
-      <a href="contact.html" class="interactive-zone inline-block bg-ink-black text-warm-ivory px-12 py-5 font-body text-label-caps uppercase hover:bg-tertiary hover:text-ink-black transition-colors duration-300 mt-8">Apply for a Revenue Audit</a>
-      <p class="mt-6 font-body text-label-caps uppercase opacity-50 tracking-widest">Complimentary · No obligation · For established service businesses generating $5K+/mo</p>
+  <section class="pad-loose px-6 md:px-margin-safe bg-warm-ivory text-ink-black text-center reveal">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display title-major text-[42px] md:text-[64px] leading-[1.05] mb-8">Apply for a Revenue Audit.</h2>
+      <p class="font-body text-lg opacity-70 mb-10 max-w-xl mx-auto">We'll find the leak, name the number worth moving, and tell you whether we can fix it. If not, we'll say so.</p>
+      <a href="audit.html" class="interactive-zone inline-block bg-ink-black text-warm-ivory px-10 py-4 font-body text-[13px] hover:bg-tertiary hover:text-ink-black transition-colors duration-300">Apply for a Revenue Audit</a>
     </div>
   </section>
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="w-full py-24 bg-ink-black border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-12 gap-gutter px-6 md:px-margin-safe text-on-surface-variant">
-  <div class="md:col-span-4 flex flex-col justify-between">
-    <div>
-      <span class="font-display text-xl uppercase text-on-surface">Grov Media</span>
-      <p class="font-body text-body-md text-sm mt-4 max-w-xs">We help service businesses generate more predictable clients — by improving acquisition, conversion, and lead-handling systems.</p>
-      <a href="contact.html" class="btn-gold inline-block bg-tertiary text-ink-black px-6 py-3 font-body text-label-caps uppercase mt-6 hover:opacity-90">Apply for a Revenue Audit</a>
+<footer class="w-full pt-20 pb-10 bg-ink-black border-t border-outline-variant/30 px-6 md:px-margin-safe text-on-surface-variant">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+    <div class="md:col-span-4">
+      <span class="font-display text-lg text-on-surface">Grov Media</span>
+      <p class="font-body text-[14px] mt-4 max-w-xs leading-relaxed">We help service businesses generate more predictable clients.</p>
     </div>
-    <p class="font-body text-body-md text-sm mt-12">© 2026 GrovMedia.com | All Rights Reserved.</p>
+    <div class="md:col-span-4">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Find Us</p>
+      <p class="font-body text-[13px] mb-4 leading-relaxed">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad, Gujarat 382330</p>
+      <p class="font-body text-[13px] leading-relaxed">5 Penn Plaza, 14th Floor<br>New York, NY 10001</p>
+    </div>
+    <div class="md:col-span-4 md:text-right">
+      <p class="font-body text-[11px] tracking-wide text-on-surface-variant/60 mb-4">Navigate</p>
+      <div class="flex flex-col gap-2 font-body text-[13px]">
+        <a href="method.html" class="hover:text-tertiary transition-colors">Method</a>
+        <a href="results.html" class="hover:text-tertiary transition-colors">Results</a>
+        <a href="about.html" class="hover:text-tertiary transition-colors">About</a>
+        <a href="faq.html" class="hover:text-tertiary transition-colors">FAQ</a>
+        <a href="tel:+918733948884" class="hover:text-tertiary transition-colors">+91 8733948884</a>
+      </div>
+    </div>
   </div>
-  <div class="md:col-span-4">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Find Us</p>
-    <div class="mb-6">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-1">India</p>
-      <p class="font-body text-body-md text-sm">Vitthal Plaza, Shri Balaji Road<br>Vasant Vihar, Ahmedabad<br>Gujarat, India 382330</p>
-    </div>
-    <div class="mb-6">
-      <p class="font-body text-label-caps text-tertiary uppercase mb-1">United States</p>
-      <p class="font-body text-body-md text-sm">5 Penn Plaza, 14th Floor<br>New York, NY 10001, US</p>
-    </div>
-    <a href="tel:+918733948884" class="font-body text-body-md text-sm hover:text-tertiary transition-colors">+91 8733948884</a>
-  </div>
-  <div class="md:col-span-4 flex flex-col md:items-end">
-    <p class="font-body text-label-caps uppercase text-on-surface mb-6">Navigate</p>
-    <div class="flex flex-col gap-3 md:text-right">
-      <a href="method.html" class="font-body text-body-md hover:text-tertiary transition-colors">Methodology</a>
-      <a href="results.html" class="font-body text-body-md hover:text-tertiary transition-colors">Our Work</a>
-      <a href="index.html#qualify" class="font-body text-body-md hover:text-tertiary transition-colors">Who We Serve</a>
-      <a href="about.html" class="font-body text-body-md hover:text-tertiary transition-colors">About</a>
-      <a href="faq.html" class="font-body text-body-md hover:text-tertiary transition-colors">FAQ</a>
-      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Privacy Policy</a>
-      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="font-body text-body-md hover:text-tertiary transition-colors">Cookie Policy</a>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 border-t border-outline-variant/20">
+    <p class="font-body text-[12px] text-on-surface-variant/50">© 2026 GrovMedia.com — All Rights Reserved.</p>
+    <div class="flex gap-6 font-body text-[12px] text-on-surface-variant/50">
+      <a href="https://grovmedia.com/privacy-policy-7940" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Privacy Policy</a>
+      <a href="https://app.guaranteedcrm.io/cookie-policy/" target="_blank" rel="noopener" class="hover:text-tertiary transition-colors">Cookie Policy</a>
     </div>
   </div>
 </footer>
 
 <script src="main.js"></script>
-<script>
-  // Render case study preview (first 4) on homepage
-  const caseGrid = document.getElementById('case-grid');
-  if (caseGrid) {
-    caseStudies.slice(0, 4).forEach((c, i) => {
-      const el = document.createElement('div');
-      el.className = `case-card group reveal ${i % 2 === 1 ? 'delay-200' : ''} interactive-zone`;
-      el.innerHTML = `
-        <div class="aspect-[16/10] img-frame img-placeholder rounded-lg mb-6"><span class="img-label">Grov Media / ${c.client}</span></div>
-        <p class="font-body text-label-caps uppercase text-tertiary mb-2">${c.tag}</p>
-        <div class="flex justify-between items-end mb-4">
-          <h3 class="font-display text-headline-md text-on-surface">${c.client}</h3>
-          <span class="case-arrow font-body text-tertiary text-xl">→</span>
-        </div>
-        <p class="font-body text-body-md text-on-surface-variant mb-4">${c.location}</p>
-        <div class="flex gap-8">
-          ${c.stats.slice(0,2).map(s => `<div><div class="case-result font-display text-3xl text-on-surface">${s.value}</div><div class="font-body text-[11px] text-on-surface-variant uppercase mt-1 max-w-[140px]">${s.label}</div></div>`).join('')}
-        </div>`;
-      caseGrid.appendChild(el);
-    });
-  }
-
-  // Render video grid (first 3)
-  const videoGrid = document.getElementById('video-grid');
-  if (videoGrid) {
-    Object.entries(videos).slice(0, 3).forEach(([key, v], i) => {
-      const el = document.createElement('button');
-      el.className = `group text-left reveal ${i === 1 ? 'delay-100' : i === 2 ? 'delay-200' : ''} interactive-zone`;
-      el.setAttribute('aria-label', `Watch ${v.title} — ${v.client} on YouTube`);
-      el.innerHTML = `
-        <div class="aspect-video img-frame img-placeholder rounded-lg mb-4">
-          <div class="flex flex-col items-center justify-center gap-4 relative z-10">
-            <div class="video-play-btn w-12 h-12 rounded-full border border-tertiary flex items-center justify-center">
-              <span class="material-symbols-outlined ml-1">play_arrow</span>
-            </div>
-            <span class="img-label text-[10px]">Watch on YouTube</span>
-          </div>
-        </div>
-        <h4 class="font-body text-body-lg text-on-surface">${v.client}</h4>`;
-      el.addEventListener('click', () => openVideo(key));
-      videoGrid.appendChild(el);
-    });
-  }
-
-  // FAQ preview (first 3 questions, static summary — link to /faq.html for interactivity)
-  const faqPreview = document.getElementById('faq-preview-list');
-  if (faqPreview) {
-    const preview = [
-      { q: "Who is this built for?", a: "Service businesses already generating revenue — coaches, consultants, practitioners, trainers, educators, personal brands — with some existing traction but inconsistent client flow." },
-      { q: "What is the Revenue Audit?", a: "A focused diagnostic call where we map exactly how clients currently move through your business — identifying where leads are leaking and what's realistically fixable." },
-      { q: "How long until I see results?", a: "Some clients see lead quality and follow-up improvements within the first two weeks. Full funnel builds typically take 2–4 weeks to launch." }
-    ];
-    preview.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'border-b border-outline-variant/30 py-6';
-      div.innerHTML = `<h3 class="font-display text-xl text-on-surface mb-2">${item.q}</h3><p class="font-body text-body-md text-on-surface-variant">${item.a}</p>`;
-      faqPreview.appendChild(div);
-    });
-  }
-</script>
 </body>
 </html>

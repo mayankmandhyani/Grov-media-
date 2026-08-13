@@ -248,17 +248,70 @@ function initAccordion() {
   });
 }
 
-/* ---------- HERO PIPELINE NODE CYCLE ---------- */
-function initPipelineCycle() {
-  const nodes = ['node-1','node-2','node-3','node-4','node-5'].map(id => document.getElementById(id)).filter(Boolean);
-  if (!nodes.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let i = 0;
-  setInterval(() => {
-    nodes.forEach(n => n.classList.remove('active-node'));
-    nodes[i].classList.add('active-node');
-    i = (i + 1) % nodes.length;
-  }, 1000);
+/* ---------- HERO / FOOTER SPINE CYCLE ----------
+   Sequential highlight across .spine-node / .spine-label pairs, with the
+   connecting .spine-fill segment animating alongside. Works for any
+   spine instance on the page (hero uses one, footer echo uses another). */
+function initSpineCycle() {
+  document.querySelectorAll('[data-spine]').forEach(spine => {
+    const nodes = Array.from(spine.querySelectorAll('.spine-node'));
+    const labels = Array.from(spine.querySelectorAll('.spine-label'));
+    const fills = Array.from(spine.querySelectorAll('.spine-fill'));
+    if (!nodes.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      nodes[nodes.length - 1]?.classList.add('spine-active');
+      labels[labels.length - 1]?.classList.add('spine-label-active');
+      fills.forEach(f => f.classList.add('spine-fill-active'));
+      return;
+    }
+    let i = 0;
+    function step() {
+      nodes.forEach(n => n.classList.remove('spine-active'));
+      labels.forEach(l => l.classList.remove('spine-label-active'));
+      fills.forEach(f => f.classList.remove('spine-fill-active'));
+      nodes[i]?.classList.add('spine-active');
+      labels[i]?.classList.add('spine-label-active');
+      for (let j = 0; j < i; j++) fills[j]?.classList.add('spine-fill-active');
+      i = (i + 1) % nodes.length;
+    }
+    step();
+    setInterval(step, 1400);
+  });
+}
+
+/* ---------- METHOD PAGE — SCROLL-LINKED VERTICAL SPINE ----------
+   Fills a vertical track proportional to scroll progress through the
+   methodology section, and highlights the current stage marker. */
+function initMethodSpine() {
+  const track = document.getElementById('method-spine-fill');
+  const wrapper = document.getElementById('method-spine-wrapper');
+  if (!track || !wrapper) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function update() {
+    const rect = wrapper.getBoundingClientRect();
+    const total = rect.height - window.innerHeight * 0.5;
+    const scrolled = Math.min(Math.max(-rect.top + window.innerHeight * 0.3, 0), total);
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    track.style.height = pct + '%';
+  }
+  if (reduce) { track.style.height = '100%'; return; }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ---------- DIAGNOSTIC SEQUENCE (Revenue Audit) ----------
+   Click/keyboard toggle for touch devices where :hover doesn't apply. */
+function initDiagnosticStages() {
+  document.querySelectorAll('.diag-stage').forEach(stage => {
+    const trigger = stage.querySelector('[data-diag-trigger]');
+    if (!trigger) return;
+    trigger.addEventListener('click', () => {
+      const isOpen = stage.classList.contains('diag-open');
+      document.querySelectorAll('.diag-stage').forEach(s => s.classList.remove('diag-open'));
+      if (!isOpen) stage.classList.add('diag-open');
+    });
+  });
 }
 
 /* ---------- FOUNDER PARALLAX ---------- */
@@ -307,7 +360,6 @@ function markActiveNav() {
   document.querySelectorAll('[data-nav-link]').forEach(link => {
     const href = link.getAttribute('href');
     if (href === path || (path === '' && href === 'index.html')) {
-      link.classList.add('text-tertiary');
       link.setAttribute('aria-current', 'page');
     }
   });
@@ -319,7 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initReveal();
   initAccordion();
-  initPipelineCycle();
+  initSpineCycle();
+  initMethodSpine();
+  initDiagnosticStages();
   initFounderParallax();
   initCursor();
   markActiveNav();
