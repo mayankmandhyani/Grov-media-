@@ -354,32 +354,6 @@ function openVideo(key) {
   window.open(v.watchUrl, '_blank', 'noopener');
 }
 
-/* ---------- WHATSAPP FLOATING CTA ----------
-   Entrance after a short delay, brief label expansion so first-time
-   visitors read "Chat with Grov" once, then a single soft attention
-   ring later — never a loop, never aggressive. */
-function initWhatsAppCTA() {
-  const cta = document.getElementById('wa-cta');
-  if (!cta) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const showDelay = reduce ? 0 : 900;
-  setTimeout(() => {
-    cta.classList.add('wa-visible');
-    if (!reduce) {
-      cta.classList.add('wa-expanded');
-      setTimeout(() => cta.classList.remove('wa-expanded'), 2600);
-    }
-  }, showDelay);
-
-  if (!reduce) {
-    setTimeout(() => {
-      cta.classList.add('wa-ring');
-      setTimeout(() => cta.classList.remove('wa-ring'), 1200);
-    }, 6000);
-  }
-}
-
 /* ---------- MARQUEE ----------
    Builds the doubled track from a single item list so the loop is
    seamless (translateX(-50%) always lands on an identical frame). */
@@ -413,7 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initDiagnosticStages();
   initFounderParallax();
   initCursor();
-  initWhatsAppCTA();
   initMarquee();
   markActiveNav();
 });
