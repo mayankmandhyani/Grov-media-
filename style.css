@@ -72,6 +72,7 @@ body {
   background: linear-gradient(155deg, var(--char-2) 0%, var(--char-1) 100%);
   position: relative;
   overflow: hidden;
+  border-radius: 14px;
 }
 .img-frame img {
   width: 100%; height: 100%; object-fit: cover;
@@ -177,8 +178,12 @@ body {
 .cinematic-reveal.active { clip-path: inset(0); }
 
 /* ---------- Nav ---------- */
-#main-nav { transition: background-color 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease; }
-#main-nav.scrolled { background-color: rgba(11,11,14,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(58,58,64,0.5); }
+#main-nav {
+  background-color: rgba(11,11,14,0.72);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
+}
+#main-nav.scrolled { background-color: rgba(11,11,14,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(58,58,64,0.5); }
 .nav-link { position: relative; color: var(--grey); transition: color 0.3s ease; }
 .nav-link::after {
   content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px; background: var(--gold);
