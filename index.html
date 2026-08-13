@@ -60,13 +60,13 @@ tailwind.config = {
 <main class="pt-20">
 
   <!-- ============ HERO ============ -->
-  <section class="min-h-[92vh] flex flex-col justify-center px-6 md:px-margin-safe relative overflow-hidden pad-tight">
-    <canvas id="kinetic-grid" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+  <section id="hero" class="min-h-[92vh] flex flex-col justify-center px-6 md:px-margin-safe relative overflow-hidden pad-tight">
+    <canvas id="kinetic-grid" class="absolute inset-0 w-full h-full" aria-hidden="true" data-depth="10"></canvas>
     <div class="bg-grain"></div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
       <div class="lg:col-span-7">
         <p class="eyebrow on-gold mb-6 hero-in" data-hero-order="0">Predictable Client Acquisition</p>
-        <h1 class="font-display title-major text-[42px] leading-[1.05] md:text-[68px] md:leading-[1.04] text-on-surface mb-8 text-balance hero-in" data-hero-order="1">We help service businesses generate more <span class="italic">predictable</span> clients.</h1>
+        <h1 class="font-display title-major text-[42px] leading-[1.05] md:text-[68px] md:leading-[1.04] text-on-surface mb-8 text-balance hero-in" data-hero-order="1" data-depth="2">We help service businesses generate more <span class="italic">predictable</span> clients.</h1>
         <p class="font-body text-lg leading-relaxed text-on-surface-variant max-w-lg mb-10 hero-in" data-hero-order="2">Acquisition, conversion, and lead-handling systems — built so revenue stops depending on the founder chasing every lead.</p>
         <div class="flex flex-wrap gap-4">
           <a target="_blank" rel="noopener" href="https://wa.me/918733948884?text=Hi%20Grov%20Media%2C%20I%27d%20like%20to%20apply%20for%20a%20Revenue%20Audit." class="interactive-zone btn-gold bg-tertiary text-ink-black px-7 py-3.5 font-body text-[13px] hero-in" data-hero-order="3">Apply for a Revenue Audit</a>
@@ -75,7 +75,7 @@ tailwind.config = {
       </div>
 
       <!-- Signature spine — real system, not decoration -->
-      <div class="lg:col-span-5 hero-in" data-hero-order="5">
+      <div class="lg:col-span-5 hero-in" data-hero-order="5" data-depth="6">
         <div class="flex flex-col gap-0" data-spine aria-hidden="true">
           <div class="flex items-center gap-0">
             <div class="flex flex-col items-center gap-3"><div class="spine-node"></div><span class="spine-label">Attention</span></div>
@@ -103,9 +103,9 @@ tailwind.config = {
   <!-- ============ THE PROBLEM (3 only) ============ -->
   <section class="pad-normal px-6 md:px-margin-safe">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-      <div class="md:col-span-4 reveal">
-        <p class="eyebrow mb-4">The Problem</p>
-        <h2 class="font-display title-minor text-[30px] leading-tight text-on-surface">Most service businesses don't have <span class="italic text-tertiary">predictable</span> acquisition.</h2>
+      <div class="md:col-span-4">
+        <p class="eyebrow mb-4 reveal">The Problem</p>
+        <h2 class="font-display title-minor text-[30px] leading-tight text-on-surface reveal-heading">Most service businesses don't have <span class="italic text-tertiary">predictable</span> acquisition.</h2>
       </div>
       <div class="md:col-span-7 md:col-start-6">
         <div class="flex flex-col">
@@ -130,9 +130,9 @@ tailwind.config = {
 
   <!-- ============ APPROACH (4 principles, quiet list not cards) ============ -->
   <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low">
-    <div class="max-w-2xl mb-16 reveal">
-      <p class="eyebrow on-gold mb-4">The Grov Approach</p>
-      <h2 class="font-display title-minor text-[30px] text-on-surface leading-tight">Systems that understand how people decide — not just automation logic.</h2>
+    <div class="max-w-2xl mb-16">
+      <p class="eyebrow on-gold mb-4 reveal">The Grov Approach</p>
+      <h2 class="font-display title-minor text-[30px] text-on-surface leading-tight reveal-heading">Systems that understand how people decide — not just automation logic.</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-4xl">
       <div class="reveal"><p class="font-display text-xl text-on-surface mb-2">Buyer psychology mapping</p><p class="font-body text-[15px] text-on-surface-variant leading-relaxed">How your ideal client actually decides — what builds trust, what stalls them.</p></div>
@@ -175,43 +175,43 @@ tailwind.config = {
 
   <!-- ============ RESULTS TEASER (one strong case, editorial) ============ -->
   <section class="pad-normal px-6 md:px-margin-safe">
-    <div class="flex justify-between items-end mb-12 reveal">
+    <div class="flex justify-between items-end mb-12">
       <div>
-        <p class="eyebrow mb-4">Proof</p>
-        <h2 class="font-display title-minor text-[30px] text-on-surface">Systems built. <span class="italic text-tertiary">Numbers moved.</span></h2>
+        <p class="eyebrow mb-4 reveal">Proof</p>
+        <h2 class="font-display title-minor text-[30px] text-on-surface reveal-heading">Systems built. <span class="italic text-tertiary">Numbers moved.</span></h2>
       </div>
-      <a href="results.html" class="btn-text hidden md:inline-block font-body text-[13px] text-on-surface-variant">All case studies <span class="btn-arrow">→</span></a>
+      <a href="results.html" class="btn-text hidden md:inline-block font-body text-[13px] text-on-surface-variant reveal">All case studies <span class="btn-arrow">→</span></a>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 group reveal delay-100">
+    <div class="case-editorial grid grid-cols-1 md:grid-cols-12 gap-10 group reveal">
       <div class="md:col-span-7">
-        <div class="aspect-[16/10] img-frame">
+        <div class="aspect-[16/10] img-frame reveal-image">
           <span class="img-caption">Grov Media <span class="divider">/</span> Client Story</span>
         </div>
       </div>
       <div class="md:col-span-5 flex flex-col justify-center">
-        <p class="eyebrow on-gold mb-3">Quiz Funnel + AI System</p>
-        <p class="font-display text-2xl text-on-surface mb-4">Online Wellness Coach</p>
+        <p class="eyebrow on-gold mb-3 case-seq case-seq-title">Quiz Funnel + AI System</p>
+        <p class="font-display text-2xl text-on-surface mb-4 case-seq case-seq-title">Online Wellness Coach</p>
         <p class="font-body text-[15px] text-on-surface-variant leading-relaxed mb-6">Engaged audience, no structured path from follower to client — every sale required the founder personally chasing leads.</p>
-        <div class="case-metric font-display text-5xl text-on-surface mb-2">312%</div>
-        <p class="font-body text-[12px] text-on-surface-variant">Increase in qualified enquiries within 60 days</p>
+        <div class="case-metric font-display text-5xl text-on-surface mb-2 case-seq case-seq-metric">312%</div>
+        <p class="font-body text-[12px] text-on-surface-variant case-seq case-seq-metric">Increase in qualified enquiries within 60 days</p>
       </div>
     </div>
-    <a href="results.html" class="btn-text md:hidden inline-block font-body text-[13px] text-on-surface-variant mt-10">All case studies <span class="btn-arrow">→</span></a>
+    <a href="results.html" class="btn-text md:hidden inline-block font-body text-[13px] text-on-surface-variant mt-10 reveal">All case studies <span class="btn-arrow">→</span></a>
   </section>
   <div class="thin-rule"></div>
 
   <!-- ============ FOUNDER TEASER ============ -->
   <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-      <div class="md:col-span-5 reveal">
-        <div class="aspect-[3/4] img-frame max-w-sm">
+      <div class="md:col-span-5">
+        <div class="aspect-[3/4] img-frame max-w-sm reveal-image">
           <span class="img-caption">Grov Media <span class="divider">/</span> Founders</span>
         </div>
       </div>
-      <div class="md:col-span-6 md:col-start-7 reveal delay-100">
-        <p class="eyebrow mb-4">Built By Founders</p>
-        <p class="font-display text-2xl md:text-3xl text-on-surface leading-snug mb-6">We started as a social media agency. We watched talented owners create brilliant content — and still not grow. <span class="italic text-tertiary">So we built the answer.</span></p>
-        <a href="about.html" class="btn-text font-body text-[13px] text-on-surface-variant">Meet Mokshita &amp; Jay <span class="btn-arrow">→</span></a>
+      <div class="md:col-span-6 md:col-start-7">
+        <p class="eyebrow mb-4 reveal">Built By Founders</p>
+        <p class="font-display text-2xl md:text-3xl text-on-surface leading-snug mb-6 reveal-body">We started as a social media agency. We watched talented owners create brilliant content — and still not grow. <span class="italic text-tertiary">So we built the answer.</span></p>
+        <a href="about.html" class="btn-text font-body text-[13px] text-on-surface-variant reveal-body">Meet Mokshita &amp; Jay <span class="btn-arrow">→</span></a>
       </div>
     </div>
   </section>

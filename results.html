@@ -64,9 +64,9 @@ tailwind.config = {
 
   <!-- Before/After Data -->
   <section class="pad-normal px-6 md:px-margin-safe" id="data">
-    <div class="max-w-2xl mb-16 reveal">
-      <p class="eyebrow mb-4">The Data</p>
-      <h2 class="font-display title-minor text-[30px] text-on-surface">Before Grov. <span class="italic text-tertiary">After Grov.</span></h2>
+    <div class="max-w-2xl mb-16">
+      <p class="eyebrow mb-4 reveal">The Data</p>
+      <h2 class="font-display title-minor text-[30px] text-on-surface reveal-heading">Before Grov. <span class="italic text-tertiary">After Grov.</span></h2>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-10 mb-24 dashboard-stats reveal">
@@ -111,20 +111,20 @@ tailwind.config = {
             <line stroke="currentColor" class="text-outline-variant/30" stroke-width="1" x1="0" x2="560" y1="140" y2="140"/>
             <line stroke="currentColor" class="text-outline-variant/30" stroke-width="1" x1="0" x2="560" y1="60" y2="60"/>
             <path class="line-graph-path" d="M0,220 C60,210 100,190 160,175 S260,140 320,110 S440,55 560,10" fill="none" stroke="#c9a961" stroke-width="3"/>
-            <path class="opacity-20" d="M0,220 C60,210 100,190 160,175 S260,140 320,110 S440,55 560,10 L560,240 L0,240 Z" fill="url(#rev-gradient)"/>
+            <path class="graph-fill" d="M0,220 C60,210 100,190 160,175 S260,140 320,110 S440,55 560,10 L560,240 L0,240 Z" fill="url(#rev-gradient)"/>
             <circle class="graph-dot" cx="0" cy="220" r="4" fill="#0b0b0e" stroke="#c9a961" stroke-width="2"/>
             <circle class="graph-dot" cx="160" cy="175" r="4" fill="#0b0b0e" stroke="#c9a961" stroke-width="2"/>
             <circle class="graph-dot" cx="320" cy="110" r="4" fill="#0b0b0e" stroke="#c9a961" stroke-width="2"/>
-            <circle class="graph-dot" cx="560" cy="10" r="4" fill="#0b0b0e" stroke="#c9a961" stroke-width="2"/>
+            <circle class="graph-dot graph-dot-final" cx="560" cy="10" r="4" fill="#0b0b0e" stroke="#c9a961" stroke-width="2"/>
             <defs><linearGradient id="rev-gradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#c9a961" stop-opacity="0.4"/><stop offset="100%" stop-color="#c9a961" stop-opacity="0"/></linearGradient></defs>
           </svg>
           <div class="grid grid-cols-6 gap-2 mt-2 font-body text-[10px] text-on-surface-variant text-center">
-            <span>M1<br><span class="text-on-surface">$3.2K</span></span>
-            <span>M2<br><span class="text-on-surface">$4.8K</span></span>
-            <span>M3<br><span class="text-on-surface">$6.5K</span></span>
-            <span>M4<br><span class="text-on-surface">$8.9K</span></span>
-            <span>M5<br><span class="text-on-surface">$11.2K</span></span>
-            <span>M6<br><span class="text-tertiary">$14.1K–$18K+</span></span>
+            <span class="graph-label">M1<br><span class="text-on-surface">$3.2K</span></span>
+            <span class="graph-label">M2<br><span class="text-on-surface">$4.8K</span></span>
+            <span class="graph-label">M3<br><span class="text-on-surface">$6.5K</span></span>
+            <span class="graph-label">M4<br><span class="text-on-surface">$8.9K</span></span>
+            <span class="graph-label">M5<br><span class="text-on-surface">$11.2K</span></span>
+            <span class="graph-label graph-label-final">M6<br><span class="text-tertiary">$14.1K–$18K+</span></span>
           </div>
         </div>
       </div>
@@ -141,27 +141,27 @@ tailwind.config = {
           <div class="flex items-center gap-4">
             <span class="font-body text-[11px] text-on-surface-variant w-20 shrink-0">Attention</span>
             <div class="flex-1 h-8 bg-surface-container-high overflow-hidden"><div class="funnel-bar h-full bg-outline-variant/60" style="width:100%; transition-delay:0ms"></div></div>
-            <span class="font-display text-sm text-on-surface w-14 text-right">100%</span>
+            <span class="font-display text-sm text-on-surface w-14 text-right funnel-label" style="transition-delay:400ms">100%</span>
           </div>
           <div class="flex items-center gap-4">
             <span class="font-body text-[11px] text-on-surface-variant w-20 shrink-0">Inquiry</span>
             <div class="flex-1 h-8 bg-surface-container-high overflow-hidden"><div class="funnel-bar h-full bg-outline-variant/60" style="width:38%; transition-delay:150ms"></div></div>
-            <span class="font-display text-sm text-on-surface w-14 text-right">38%</span>
+            <span class="font-display text-sm text-on-surface w-14 text-right funnel-label" style="transition-delay:550ms">38%</span>
           </div>
           <div class="flex items-center gap-4">
             <span class="font-body text-[11px] text-on-surface-variant w-20 shrink-0">Call Booked</span>
             <div class="flex-1 h-8 bg-surface-container-high overflow-hidden"><div class="funnel-bar h-full bg-tertiary/50" style="width:21%; transition-delay:300ms"></div></div>
-            <span class="font-display text-sm text-on-surface w-14 text-right">21%</span>
+            <span class="font-display text-sm text-on-surface w-14 text-right funnel-label" style="transition-delay:700ms">21%</span>
           </div>
           <div class="flex items-center gap-4">
             <span class="font-body text-[11px] text-on-surface-variant w-20 shrink-0">Show</span>
             <div class="flex-1 h-8 bg-surface-container-high overflow-hidden"><div class="funnel-bar h-full bg-tertiary/70" style="width:17%; transition-delay:450ms"></div></div>
-            <span class="font-display text-sm text-on-surface w-14 text-right">17%</span>
+            <span class="font-display text-sm text-on-surface w-14 text-right funnel-label" style="transition-delay:850ms">17%</span>
           </div>
           <div class="flex items-center gap-4">
             <span class="font-body text-[11px] text-tertiary w-20 shrink-0">Client</span>
             <div class="flex-1 h-8 bg-surface-container-high overflow-hidden"><div class="funnel-bar h-full bg-tertiary" style="width:10%; transition-delay:600ms"></div></div>
-            <span class="font-display text-sm text-tertiary w-14 text-right">10%</span>
+            <span class="font-display text-sm text-tertiary w-14 text-right funnel-label" style="transition-delay:1000ms">10%</span>
           </div>
         </div>
         <p class="font-body text-[11px] text-on-surface-variant/50 mt-4">Illustrative — proportional stage-to-stage narrowing observed across retainer implementations.</p>
@@ -172,10 +172,10 @@ tailwind.config = {
 
   <!-- All case studies -->
   <section class="pad-normal px-6 md:px-margin-safe" id="cases">
-    <div class="max-w-2xl mb-20 reveal">
-      <p class="eyebrow mb-4">Work</p>
-      <h2 class="font-display title-minor text-[30px] text-on-surface mb-4">Every case study.</h2>
-      <p class="font-body text-[15px] text-on-surface-variant leading-relaxed">Composite client profiles. Results representative of system implementations.</p>
+    <div class="max-w-2xl mb-20">
+      <p class="eyebrow mb-4 reveal">Work</p>
+      <h2 class="font-display title-minor text-[30px] text-on-surface mb-4 reveal-heading">Every case study.</h2>
+      <p class="font-body text-[15px] text-on-surface-variant leading-relaxed reveal-body">Composite client profiles. Results representative of system implementations.</p>
     </div>
     <div class="flex flex-col" id="case-list"></div>
   </section>
@@ -183,9 +183,9 @@ tailwind.config = {
 
   <!-- Testimonials + videos -->
   <section class="pad-normal px-6 md:px-margin-safe bg-surface-container-low" id="testimonials">
-    <div class="max-w-2xl mb-16 reveal">
-      <p class="eyebrow on-gold mb-4">Client Voices</p>
-      <h2 class="font-display title-minor text-[30px] text-on-surface">What working with Grov <span class="italic text-tertiary">actually feels like.</span></h2>
+    <div class="max-w-2xl mb-16">
+      <p class="eyebrow on-gold mb-4 reveal">Client Voices</p>
+      <h2 class="font-display title-minor text-[30px] text-on-surface reveal-heading">What working with Grov <span class="italic text-tertiary">actually feels like.</span></h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20" id="video-grid-full"></div>

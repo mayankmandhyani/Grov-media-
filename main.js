@@ -123,19 +123,57 @@ const beforeAfterMetrics = [
 
 const REVENUE_AUDIT_URL = "https://gm.grovmedia.com/widget/bookings/growthopportunitygrov";
 
-/* ---------- NAV / SCROLL PROGRESS ---------- */
+/* ---------- NAV / SCROLL PROGRESS ----------
+   Progress = scrollTop / (documentHeight - viewportHeight), read fresh
+   on every rAF tick rather than cached — this is what makes it immune
+   to mobile address-bar collapse/expand and dynamic content height
+   changes. The rAF loop itself only runs while scrolling is actually
+   happening (started on 'scroll', stopped after a short idle window),
+   so it costs nothing at rest. A ResizeObserver on <body> forces an
+   immediate recompute if content height changes without a scroll
+   event (e.g. a late-loading image, an accordion opening). */
 function initNav() {
   const nav = document.getElementById('main-nav');
   const progress = document.getElementById('scroll-progress');
-  function onScroll() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = height > 0 ? winScroll / height : 0;
-    if (progress) progress.style.transform = `scaleX(${scrolled})`;
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+  let ticking = false;
+  let idleTimer = null;
+
+  function computeAndApply() {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop || document.body.scrollTop || 0;
+    const viewport = window.innerHeight || doc.clientHeight;
+    const total = doc.scrollHeight - viewport;
+    // Clamp — never negative (short pages), never exceeds 1 (rounding at the boundary).
+    const ratio = total > 0 ? Math.min(1, Math.max(0, scrollTop / total)) : 0;
+    if (progress) progress.style.transform = `scaleX(${ratio})`;
+    if (nav) nav.classList.toggle('scrolled', scrollTop > 40);
+    ticking = false;
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+
+  function requestTick() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(computeAndApply);
+    }
+  }
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick, { passive: true });
+
+  // Mobile address-bar show/hide changes viewport height without firing
+  // 'resize' reliably on iOS Safari — visualViewport catches it.
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', requestTick, { passive: true });
+  }
+
+  // Dynamic content (accordion open, late image load, marquee mount)
+  // changes scrollHeight without any scroll/resize event at all.
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(() => requestTick());
+    ro.observe(document.body);
+  }
+
+  computeAndApply(); // correct on load, including deep-link/hash-scroll landings
 }
 
 /* ---------- MOBILE DRAWER ---------- */
@@ -188,9 +226,99 @@ function initHeroChoreography() {
   });
 }
 
-/* ---------- SCROLL REVEAL ---------- */
+/* ---------- HERO POINTER DEPTH ----------
+   Elements inside the hero with a [data-depth] attribute drift a few
+   pixels toward the pointer position — small, damped, layered by
+   depth value (headline moves least, background canvas moves most).
+   Interpolated via lerp toward a target on every rAF tick, never set
+   directly from the mousemove handler, so it never feels like it's
+   "following" mechanically. Desktop only; fully off under reduced
+   motion or touch. */
+function initHeroDepth() {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+  const layers = Array.from(hero.querySelectorAll('[data-depth]')).map(el => ({
+    el,
+    depth: parseFloat(el.getAttribute('data-depth')) || 4,
+    x: 0, y: 0,       // current (interpolated) pointer offset
+    tx: 0, ty: 0,      // target pointer offset
+    scrollY: 0         // additional scroll-exit offset, merged into the same transform write
+  }));
+  if (!layers.length) return;
+
+  const LERP = 0.06; // slow, dampened follow — not a mechanical snap
+  let rafId = null;
+  let heroVisible = true;
+
+  function onMove(e) {
+    const rect = hero.getBoundingClientRect();
+    // Normalized -1..1 from hero center, so movement direction is relative
+    // to the hero itself, not the whole viewport.
+    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    layers.forEach(layer => {
+      layer.tx = nx * layer.depth;
+      layer.ty = ny * layer.depth;
+    });
+    wake();
+  }
+
+  function onLeave() {
+    layers.forEach(layer => { layer.tx = 0; layer.ty = 0; });
+    wake();
+  }
+
+  // Scroll-exit: as the hero scrolls up out of view, the two
+  // deepest layers (spine visual, background canvas) drift a further
+  // few px — a hero visual "leaving" cue, not a full parallax scene.
+  // Scoped to only the two highest-depth layers so headline/eyebrow
+  // text (which should stay put, not swim) are unaffected.
+  function onScroll() {
+    if (!heroVisible) return;
+    const rect = hero.getBoundingClientRect();
+    const exitProgress = Math.max(0, Math.min(1, -rect.top / rect.height)); // 0 at rest, 1 as it fully exits upward
+    layers.forEach(layer => {
+      if (layer.depth >= 6) layer.scrollY = exitProgress * (layer.depth * 1.4);
+    });
+    wake();
+  }
+
+  function wake() {
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  function tick() {
+    let stillMoving = false;
+    layers.forEach(layer => {
+      layer.x += (layer.tx - layer.x) * LERP;
+      layer.y += (layer.ty - layer.y) * LERP;
+      if (Math.abs(layer.tx - layer.x) > 0.02 || Math.abs(layer.ty - layer.y) > 0.02) stillMoving = true;
+      const totalY = layer.y + layer.scrollY;
+      layer.el.style.transform = `translate3d(${layer.x.toFixed(2)}px, ${totalY.toFixed(2)}px, 0)`;
+    });
+    if (stillMoving) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null; // settle and stop the loop — no idle per-frame cost
+    }
+  }
+
+  hero.addEventListener('mousemove', onMove, { passive: true });
+  hero.addEventListener('mouseleave', onLeave, { passive: true });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { heroVisible = entry.isIntersecting; });
+    if (heroVisible) wake();
+  }, { threshold: 0 });
+  io.observe(hero);
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
 function initReveal() {
-  const revealElements = document.querySelectorAll('.reveal');
+  const revealElements = document.querySelectorAll('.reveal, .reveal-heading, .reveal-body, .reveal-image, .thin-rule');
   const graphContainers = document.querySelectorAll('.graph-trigger');
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -338,19 +466,58 @@ function initDiagnosticStages() {
 }
 
 /* ---------- FOUNDER PARALLAX ---------- */
+/* ---------- FOUNDER PARALLAX ----------
+   Small, scroll-linked depth between the two founder portraits — offset
+   is relative to each element's OWN position in the viewport (not raw
+   page scrollY), so it stays a genuinely small few-px effect regardless
+   of how far down the page the section sits. Uses a shared rAF tick
+   gated by IntersectionObserver so it costs nothing when off-screen. */
 function initFounderParallax() {
   const f1 = document.getElementById('founder-1');
   const f2 = document.getElementById('founder-2');
   if (!f1 || !f2) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  window.addEventListener('scroll', () => {
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return; // desktop-scale depth reads oddly on small screens
+
+  const MAX_OFFSET = 8; // px — small, per the brief's "very subtle depth" guidance
+  let f1Visible = false, f2Visible = false;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
     if (window.innerWidth < 768) return;
-    const rect = f1.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      f1.style.transform = `translateY(${window.scrollY * 0.03}px)`;
-      f2.style.transform = `translateY(${window.scrollY * -0.015}px)`;
+    if (f1Visible) {
+      const rect = f1.getBoundingClientRect();
+      const progress = 1 - (rect.top + rect.height / 2) / window.innerHeight; // -ish 0 at enter, 1 at exit
+      const clamped = Math.max(-1, Math.min(1, progress));
+      f1.style.transform = `translate3d(0, ${(clamped * MAX_OFFSET).toFixed(2)}px, 0)`;
     }
-  }, { passive: true });
+    if (f2Visible) {
+      const rect = f2.getBoundingClientRect();
+      const progress = 1 - (rect.top + rect.height / 2) / window.innerHeight;
+      const clamped = Math.max(-1, Math.min(1, progress));
+      f2.style.transform = `translate3d(0, ${(-clamped * MAX_OFFSET * 0.6).toFixed(2)}px, 0)`;
+    }
+  }
+
+  function requestTick() {
+    if ((f1Visible || f2Visible) && !ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.target === f1) f1Visible = entry.isIntersecting;
+      if (entry.target === f2) f2Visible = entry.isIntersecting;
+    });
+    requestTick();
+  }, { threshold: [0, 1] });
+  io.observe(f1);
+  io.observe(f2);
+
+  window.addEventListener('scroll', requestTick, { passive: true });
 }
 
 /* ---------- CUSTOM CURSOR (desktop only) ---------- */
@@ -378,8 +545,16 @@ function openVideo(key) {
 }
 
 /* ---------- MARQUEE ----------
-   Builds the doubled track from a single item list so the loop is
-   seamless (translateX(-50%) always lands on an identical frame). */
+   Builds the doubled track from a single item list, then drives it
+   with a rAF translateX loop rather than a CSS @keyframes animation —
+   this is what lets scroll velocity subtly modulate speed. Reset to
+   0 exactly when the track has scrolled past the first content set's
+   width (measured, not assumed at -50%), so the loop point is exact
+   regardless of actual rendered text width.
+   Speed responds to scroll velocity with a gentle, damped multiplier:
+   fast scroll → briefly faster marquee (never racing), scroll stops →
+   settles back to base speed over ~1s. Effect is intentionally subtle
+   — base speed dominates almost all the time. */
 function initMarquee() {
   const track = document.getElementById('marquee-track');
   if (!track) return;
@@ -388,6 +563,70 @@ function initMarquee() {
     `<span class="marquee-item">${label}<span class="marquee-sep">/</span></span>`
   ).join('');
   track.innerHTML = renderSet() + renderSet();
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // CSS handles the static/scrollable fallback
+
+  const wrap = track.closest('.marquee-wrap');
+  const BASE_SPEED = 34; // px/sec — matches the prior ~38s loop at typical content width
+  const MAX_SPEED_MULT = 1.6; // ceiling so it never "races"
+  const SPEED_LERP = 0.05; // how quickly current speed chases target speed
+
+  let setWidth = 0; // width of ONE content set (half the doubled track)
+  let x = 0;
+  let currentSpeed = BASE_SPEED;
+  let targetSpeed = BASE_SPEED;
+  let lastY = window.scrollY;
+  let lastTime = performance.now();
+  let paused = false;
+  let visible = true;
+  let rafId = null;
+
+  function measure() {
+    setWidth = track.scrollWidth / 2;
+  }
+  measure();
+  window.addEventListener('resize', measure);
+
+  function onScroll() {
+    const now = performance.now();
+    const dy = Math.abs(window.scrollY - lastY);
+    const dt = Math.max(1, now - lastTime);
+    const velocity = dy / dt; // px/ms
+    // Map velocity to a speed multiplier, capped, then decay back to 1x.
+    const mult = Math.min(MAX_SPEED_MULT, 1 + velocity * 4);
+    targetSpeed = BASE_SPEED * mult;
+    lastY = window.scrollY;
+    lastTime = now;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  wrap?.addEventListener('mouseenter', () => { paused = true; });
+  wrap?.addEventListener('mouseleave', () => { paused = false; });
+
+  const visibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { visible = entry.isIntersecting; });
+  }, { threshold: 0 });
+  if (wrap) visibilityObserver.observe(wrap);
+
+  let prevFrame = performance.now();
+  function tick(now) {
+    const dt = Math.min(48, now - prevFrame); // clamp — avoids a huge jump after a background tab
+    prevFrame = now;
+
+    // Continuously decay target speed back toward base — velocity events
+    // only push it up momentarily; without new scroll input it settles.
+    targetSpeed += (BASE_SPEED - targetSpeed) * 0.02;
+    currentSpeed += (targetSpeed - currentSpeed) * SPEED_LERP;
+
+    if (!paused && visible) {
+      x -= (currentSpeed * dt) / 1000;
+      if (Math.abs(x) >= setWidth) x += setWidth; // exact loop, no visible jump
+      track.style.transform = `translate3d(${x}px,0,0)`;
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+  rafId = requestAnimationFrame(tick);
 }
 /* ---------- KINETIC GRID (hero background canvas) ----------
    Ported from a React/canvas reference component to vanilla JS.
@@ -646,6 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initMobileMenu();
   initHeroChoreography();
+  initHeroDepth();
   initReveal();
   initAccordion();
   initSpineCycle();
